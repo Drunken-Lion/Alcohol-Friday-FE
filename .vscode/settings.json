@@ -2,5 +2,15 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.guides.bracketPairs": "active",
   "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode"
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "material-icon-theme.folders.associations": {
+    "_components": "Components",
+    "_constants": "Constant",
+    "_hooks": "Hook",
+    "_api": "Api",
+    "_store": "Container",
+    "_types": "Typescript",
+    "_utils": "Utils",
+    "(route)": "Routes"
+  }
 }
