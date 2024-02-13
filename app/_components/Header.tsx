@@ -8,14 +8,20 @@ import Menu from '/public/images/menuButton.svg';
 export default function Header() {
   const [toggleOpen, setToggleOpen] = useState(false);
 
+  const handleMenuItemClick = () => {
+    setToggleOpen(false);
+  };
+
   return (
     <React.Fragment>
       <nav
-        className={`flex max-[640px]:justify-between max-[640px]:px-4 sm:justify-between sm:px-4 lg:justify-center h-16 ${
+        className={`flex justify-between px-4 lg:justify-center ${
           toggleOpen ? 'bg-slate-700' : 'bg-slate-800'
         } text-white border-b border-white border-opacity-10`}
       >
-        <img src="./images/logo.png" className="py-3" />
+        <Link href="/" className="py-3 lg:py-2">
+          <img src="./images/logo.png" />
+        </Link>
         {/* 메뉴 아이콘 (모바일 화면) */}
         <div className="lg:hidden my-auto">
           <button className="text-white" onClick={() => setToggleOpen(!toggleOpen)}>
@@ -25,21 +31,36 @@ export default function Header() {
 
         {/* Dropdown menu */}
         {toggleOpen && (
-          <div className="lg:hidden absolute z-50 top-16 left-0 w-full bg-slate-700 text-white">
+          <div className="lg:hidden absolute z-50 top-[91px] left-0 w-full bg-slate-700 text-white">
             <ul className="flex flex-col text-white text-base font-bold ">
-              <li className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10">
+              <li
+                className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10"
+                onClick={handleMenuItemClick}
+              >
                 <Link href="/">전통주 알아보기</Link>
               </li>
-              <li className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10">
-                내주변 전통주
+              <li
+                className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10"
+                onClick={handleMenuItemClick}
+              >
+                <Link href="/restaurant">내주변 전통주</Link>
               </li>
-              <li className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10">
+              <li
+                className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10"
+                onClick={handleMenuItemClick}
+              >
                 <Link href="/store">스토어</Link>
               </li>
-              <li className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10">
+              <li
+                className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10"
+                onClick={handleMenuItemClick}
+              >
                 고객센터
               </li>
-              <li className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10">
+              <li
+                className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10"
+                onClick={handleMenuItemClick}
+              >
                 로그인
               </li>
             </ul>
@@ -50,7 +71,9 @@ export default function Header() {
           <li>
             <Link href="/">전통주 알아보기</Link>
           </li>
-          <li>내주변 전통주</li>
+          <Link href="/restaurant">
+            <li>내주변 전통주</li>
+          </Link>
           <li>
             <Link href="/store">스토어</Link>
           </li>
