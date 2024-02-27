@@ -6,9 +6,9 @@ import Member from '/public/images/member.svg';
 import Delevery from '/public/images/delevery.svg';
 import Inquiry from '/public/images/inquiry.svg';
 
-export default function MypageNav() {
+export default function Navigation() {
   return (
-    <div className="bg-[#F1F3F6] flex flex-row justify-center items-center">
+    <div className="bg-[#F1F3F6] w-11/12 flex flex-row justify-center items-center py-5 rounded-2xl">
       <div className="flex gap-0.5 items-center">
         <span className="text-zinc-800 text-xl font-bold font-['Pretendard']">닉네임 없어용</span>
         <span className="text-stone-500 text-base font-normal font-['Pretendard'] pr-20">
