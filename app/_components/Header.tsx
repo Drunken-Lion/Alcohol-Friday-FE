@@ -4,9 +4,11 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 import Menu from '/public/images/menuButton.svg';
+import { useSession } from 'next-auth/react';
 
 export default function Header() {
   const [toggleOpen, setToggleOpen] = useState(false);
+  const { data: session } = useSession();
 
   return (
     <React.Fragment>
@@ -40,7 +42,7 @@ export default function Header() {
                 고객센터
               </li>
               <li className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10">
-                로그인
+                {session ? <Link href="/logout">로그아웃</Link> : <Link href="/login">로그인</Link>}
               </li>
             </ul>
           </div>
@@ -57,7 +59,9 @@ export default function Header() {
           <li>고객센터</li>
         </ul>
         <ul className="hidden lg:flex flex-row gap-x-5 text-sm mx-8 my-auto">
-          <li>로그인</li>
+          <li>
+            {session ? <Link href="/logout">로그아웃</Link> : <Link href="/login">로그인</Link>}
+          </li>
           {/* <li>회원가입</li> */}
         </ul>
       </nav>
