@@ -1,8 +1,8 @@
 import React from 'react';
 
-type CountProps = {
+interface CountProps {
   count: Number;
-};
+}
 
 export default function OrderStatus({ count }: CountProps) {
   return (
