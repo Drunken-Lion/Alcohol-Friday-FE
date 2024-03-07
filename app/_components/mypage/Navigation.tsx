@@ -7,7 +7,7 @@ import Delevery from '/public/images/delevery.svg';
 import Inquiry from '/public/images/inquiry.svg';
 
 interface NavigationProps {
-  onClick?: () => void;
+  onClick?: (tabName: string) => void;
   nickname: string;
 }
 
@@ -22,25 +22,40 @@ export default function Navigation({ nickname, onClick }: NavigationProps) {
       </div>
       <Line />
       <div className="flex gap-16 pl-20">
-        <div className="flex flex-row gap-2.5 hover:cursor-pointer" onClick={onClick}>
+        <div
+          className="flex flex-row gap-2.5 hover:cursor-pointer"
+          onClick={() => onClick && onClick('order')}
+        >
           <Order />
           <div className="text-red-500 text-base font-bold font-['Pretendard']">주문내역</div>
         </div>
-        <div className="flex flex-row gap-2.5 hover:cursor-pointer" onClick={onClick}>
+        <div
+          className="flex flex-row gap-2.5 hover:cursor-pointer"
+          onClick={() => onClick && onClick('review')}
+        >
           <Review />
           <div className="text-zinc-800 text-base font-bold font-['Pretendard']">리뷰내역</div>
         </div>
-        <div className="flex flex-row gap-2.5 hover:cursor-pointer" onClick={onClick}>
+        <div
+          className="flex flex-row gap-2.5 hover:cursor-pointer"
+          onClick={() => onClick && onClick('member')}
+        >
           <Member />
           <div className="text-zinc-800 text-base font-bold font-['Pretendard']">회원정보</div>
         </div>
-        <div className="flex flex-row gap-2.5 hover:cursor-pointer" onClick={onClick}>
+        <div
+          className="flex flex-row gap-2.5 hover:cursor-pointer"
+          onClick={() => onClick && onClick('address')}
+        >
           <Delevery />
           <div className="text-zinc-800 text-base font-bold font-['Pretendard']">배송지 관리</div>
         </div>
-        <div className="flex flex-row gap-2.5 hover:cursor-pointer" onClick={onClick}>
+        <div
+          className="flex flex-row gap-2.5 hover:cursor-pointer"
+          onClick={() => onClick && onClick('question')}
+        >
           <Inquiry />
-          <div className=" text-zinc-800 text-base font-bold font-['Pretendard'] hover:cursor-pointer">
+          <div className="text-zinc-800 text-base font-bold font-['Pretendard'] hover:cursor-pointer">
             문의내역
           </div>
         </div>
