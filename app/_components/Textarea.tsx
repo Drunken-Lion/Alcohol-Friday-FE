@@ -20,7 +20,7 @@ export default function Textarea({
   className,
 }: TextareaProps) {
   return (
-    <div>
+    <div className="flex">
       <label htmlFor={id}>{label}</label>
       <textarea
         id={id}
@@ -28,7 +28,7 @@ export default function Textarea({
         placeholder={placeholder}
         onChange={onChange}
         value={value}
-        className={`border border-slate-300 rounded-md ${className}`}
+        className={`border border-slate-300 rounded-md w-full h-full ${className}`}
       ></textarea>
     </div>
   );

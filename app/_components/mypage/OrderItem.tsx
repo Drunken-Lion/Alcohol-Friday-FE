@@ -7,6 +7,7 @@ interface OrderItemProps {
   price: string;
   quantity: number;
   image: string;
+  isValue: Boolean;
 }
 
 export default function OrderItem({
@@ -16,6 +17,7 @@ export default function OrderItem({
   price,
   quantity,
   image,
+  isValue,
 }: OrderItemProps) {
   return (
     <div className="flex flex-row gap-5">
@@ -23,16 +25,18 @@ export default function OrderItem({
         <img src={image} />
       </div>
       <div className="flex flex-col">
-        <div className="text-zinc-800 text-base font-bold">
-          <span>[{storeName}]</span>
+        <div className="flex text-zinc-800 text-base font-bold">
+          {isValue && <span>[{storeName}]</span>}
           <span>{title}</span>
         </div>
         <span className="text-zinc-800 text-sm font-normal mb-5">{subTitle}</span>
-        <div className="text-stone-500 text-sm font-normal">
-          <span>{price}</span>
-          <span className="px-1">/</span>
-          <span>수량 {quantity}개</span>
-        </div>
+        {isValue && (
+          <div className="text-stone-500 text-sm font-normal">
+            <span>{price}</span>
+            <span className="px-1">/</span>
+            <span>수량 {quantity}개</span>
+          </div>
+        )}
       </div>
     </div>
   );
