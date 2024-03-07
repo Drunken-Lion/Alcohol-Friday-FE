@@ -1,6 +1,7 @@
-import axios from 'axios';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import KakaoProvider from 'next-auth/providers/kakao';
+
+import instance from 'app/_service/axios';
 
 type KakaoProfile = {
   id: number;
@@ -24,23 +25,26 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ account, profile }) {
-      const url = `/api/login/${account?.provider}`;
-      const data = account?.access_token;
+      const url = `/v1/auth/login/${account?.provider}`;
+      console.log(url);
+      console.log(account?.access_token);
+      const res = await instance.post(url, account?.access_token);
+      if (res.status !== 200) {
+        console.log(res.data);
+        return false;
+      }
 
-      // const res = await axios.post(url, data);
-      // if (res.status === 200) {
-      //   return true;
-      // } else {
-      //   return false;
-      // }
+      const data = res.data;
+      account!!.memberResponse = data.memberResponse;
+      account!!.jwtResponse = data.jwtResponse;
 
-      const testdata = require('public/data/login.json');
-      console.log(testdata.jwtResponse);
-
-      // return true;
-      return { ...testdata.jwtResponse.accessToken };
+      return true;
     },
     async jwt({ token, user, account, profile }) {
+      console.log(account);
+      // if (account) {
+      //   token.
+      // }
       return { ...token, ...user };
     },
     async session({ session, token, user }) {

@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React, { useState } from 'react';
 
 import Menu from '/public/images/menuButton.svg';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 
 export default function Header() {
   const [toggleOpen, setToggleOpen] = useState(false);
@@ -60,7 +60,13 @@ export default function Header() {
         </ul>
         <ul className="hidden lg:flex flex-row gap-x-5 text-sm mx-8 my-auto">
           <li>
-            {session ? <Link href="/logout">로그아웃</Link> : <Link href="/login">로그인</Link>}
+            {session ? (
+              <Link href="#" onClick={() => signOut({ callbackUrl: '/' })}>
+                로그아웃
+              </Link>
+            ) : (
+              <Link href="/login">로그인</Link>
+            )}
           </li>
           {/* <li>회원가입</li> */}
         </ul>
