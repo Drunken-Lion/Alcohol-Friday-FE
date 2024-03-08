@@ -42,10 +42,6 @@ export default function login() {
       <button onClick={() => handleKakao()}>
         <img src="/images/kakao_login_medium_wide.png" className="w-80 h-12 mt-7" />
       </button>
-      <hr className="w-450px mt-7" />
-      <p className="mt-7">
-        지금 <b>회원가입</b>하고 더 많은 기능을 사용해보세요!
-      </p>
     </div>
   );
 }
