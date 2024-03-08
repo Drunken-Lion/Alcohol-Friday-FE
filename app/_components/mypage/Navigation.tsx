@@ -8,7 +8,7 @@ import Inquiry from '/public/images/inquiry.svg';
 
 interface NavigationProps {
   onClick?: (tabName: string) => void;
-  nickname: string;
+  nickname?: string;
 }
 
 export default function Navigation({ nickname, onClick }: NavigationProps) {
