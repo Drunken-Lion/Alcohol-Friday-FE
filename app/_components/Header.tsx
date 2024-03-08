@@ -61,9 +61,13 @@ export default function Header() {
         <ul className="hidden lg:flex flex-row gap-x-5 text-sm mx-8 my-auto">
           <li>
             {session ? (
-              <Link href="#" onClick={() => signOut({ callbackUrl: '/' })}>
-                로그아웃
-              </Link>
+              <>
+                <Link href="/mypage">마이페이지</Link>
+                {'       '}
+                <Link href="#" onClick={() => signOut({ callbackUrl: '/' })}>
+                  로그아웃
+                </Link>
+              </>
             ) : (
               <Link href="/login">로그인</Link>
             )}
