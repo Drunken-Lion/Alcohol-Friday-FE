@@ -7,7 +7,7 @@
     "_components": "Components",
     "_constants": "Constant",
     "_hooks": "Hook",
-    "_api": "Api",
+    "_service": "Api",
     "_store": "Container",
     "_types": "Typescript",
     "_utils": "Utils",
