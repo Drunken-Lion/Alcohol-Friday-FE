@@ -1,3 +1,4 @@
+
 import ImageSlide from './_components/ImageSlide';
 
 export default function Home() {

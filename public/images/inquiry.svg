@@ -1,0 +1,19 @@
+<svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="mdi:customer-service" clip-path="url(#clip0_754_484)">
+<g id="Group 157">
+<circle id="Ellipse 15" cx="13.8293" cy="13.1219" r="9.87194" fill="white" stroke="#333333" stroke-width="2.5"/>
+<ellipse id="Ellipse 16" cx="17.6714" cy="7.8341" rx="3.54619" ry="6.10871" transform="rotate(-64.4468 17.6714 7.8341)" fill="#333333"/>
+<path id="Ellipse 17" d="M6.902 6.77626C9.36786 4.90546 12.82 3.60426 13.5 4.50049C14.18 5.39672 11.8302 8.151 9.36432 10.0218C6.89845 11.8926 4.34827 12.6826 3.66832 11.7864C2.98837 10.8902 4.43613 8.64706 6.902 6.77626Z" fill="#333333"/>
+<circle id="Ellipse 18" cx="10.3537" cy="14.2806" r="1.15854" fill="#333333"/>
+<circle id="Ellipse 19" cx="16.8415" cy="14.2806" r="1.15854" fill="#333333"/>
+<ellipse id="Ellipse 20" cx="25.5853" cy="14.9051" rx="2.78048" ry="4.17073" transform="rotate(9.24722 25.5853 14.9051)" fill="#FFB636"/>
+<ellipse id="Ellipse 22" cx="2.78048" cy="4.17073" rx="2.78048" ry="4.17073" transform="matrix(-0.987004 0.160695 0.160695 0.987004 4.48859 10.3418)" fill="#FFB636"/>
+<path id="Rectangle 137" d="M14.7561 17.7559C14.7561 17.2441 15.1711 16.8291 15.6829 16.8291H25.878V18.6828H15.6829C15.1711 18.6828 14.7561 18.2678 14.7561 17.7559Z" fill="#FFB636"/>
+</g>
+</g>
+<defs>
+<clipPath id="clip0_754_484">
+<rect width="30" height="30" fill="white"/>
+</clipPath>
+</defs>
+</svg>
