@@ -1,4 +1,6 @@
 import React from 'react';
+import Button from '../Button';
+import Portal from '../Portal';
 
 interface OrderItemProps {
   storeName: string;
@@ -8,6 +10,7 @@ interface OrderItemProps {
   quantity: number;
   image: string;
   isValue: Boolean;
+  onClick?: () => void;
 }
 
 export default function OrderItem({
@@ -18,6 +21,7 @@ export default function OrderItem({
   quantity,
   image,
   isValue,
+  onClick,
 }: OrderItemProps) {
   return (
     <div className="flex flex-row gap-5">
@@ -31,10 +35,22 @@ export default function OrderItem({
         </div>
         <span className="text-zinc-800 text-sm font-normal mb-5">{subTitle}</span>
         {isValue && (
-          <div className="text-stone-500 text-sm font-normal">
-            <span>{price}</span>
-            <span className="px-1">/</span>
-            <span>수량 {quantity}개</span>
+          <div>
+            <div className="text-stone-500 text-sm font-normal pb-10">
+              <span>{price}</span>
+              <span className="px-1">/</span>
+              <span>수량 {quantity}개</span>
+            </div>
+            {/* <Button
+              className="flex justify-center py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900"
+              buttonName="리뷰쓰기"
+              type={undefined}
+              onClick={onClick}
+            ></Button> */}
+            <Portal
+              portalName="리뷰쓰기"
+              className="flex justify-center py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900 cursor-grabbing"
+            />
           </div>
         )}
       </div>

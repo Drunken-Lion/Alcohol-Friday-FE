@@ -12,9 +12,13 @@ interface ModalProps {
 }
 
 export default function Modal({ onClose }: ModalProps) {
-  const [rating, setRating] = useState(3);
-  const handleRatingChange = (newRating: number) => {
-    setRating(newRating);
+  const [clicked, setClicked] = useState<boolean[]>([false, false, false, false, false]);
+  const handleStarClick = (index: number): void => {
+    let clickStates: boolean[] = [...clicked];
+    for (let i = 0; i < 5; i++) {
+      clickStates[i] = i <= index ? true : false;
+    }
+    setClicked(clickStates);
   };
 
   const [message, setMessage] = useState('');
@@ -45,7 +49,7 @@ export default function Modal({ onClose }: ModalProps) {
             <p className="text-zinc-800 text-lg font-normal text-start">
               구매하신 상품은 만족하셨나요?
             </p>
-            <ReviewRating initialRating={rating} onRatingChange={handleRatingChange} />
+            <ReviewRating clicked={clicked} onStarClick={handleStarClick} />
           </div>
           <div className="flex flex-col gap-5 py-14">
             <p className="text-zinc-800 text-lg font-normal text-start">
