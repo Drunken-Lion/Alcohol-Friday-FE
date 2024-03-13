@@ -8,9 +8,9 @@ export default function CategoryButton() {
   };
 
   return (
-    <div>
+    <div className="mx-36 mt-16">
       <p className=" text-zinc-800 text-xl font-bold mb-5">카테고리 별 보기</p>
-      <div className="flex justify-center gap-5 mb-10">
+      <div className="flex gap-8 mb-10">
         <Button
           onClick={() => handleButtonClick('전체')}
           buttonName="전체"
@@ -18,7 +18,7 @@ export default function CategoryButton() {
             activeButton === '전체'
               ? 'bg-blue-900 border-blue-900 text-white'
               : 'bg-white border-gray-300 text-neutral-400'
-          } rounded-3xl border text-center text-base font-bold py-3 px-20`}
+          } rounded-3xl border text-center text-base font-bold py-3 px-16`}
         />
         <Button
           onClick={() => handleButtonClick('막걸리')}
@@ -27,7 +27,7 @@ export default function CategoryButton() {
             activeButton === '막걸리'
               ? 'bg-blue-900 border-blue-900 text-white'
               : 'bg-white border-gray-300 text-neutral-400'
-          } rounded-3xl border text-center text-base font-bold py-3 px-20`}
+          } rounded-3xl border text-center text-base font-bold py-3 px-16`}
         />
         <Button
           onClick={() => handleButtonClick('청주')}
@@ -36,7 +36,7 @@ export default function CategoryButton() {
             activeButton === '청주'
               ? 'bg-blue-900 border-blue-900 text-white'
               : 'bg-white border-gray-300 text-neutral-400'
-          } rounded-3xl border text-center text-base font-bold py-3 px-20`}
+          } rounded-3xl border text-center text-base font-bold py-3 px-16`}
         />
         <Button
           onClick={() => handleButtonClick('과실주')}
@@ -45,7 +45,7 @@ export default function CategoryButton() {
             activeButton === '과실주'
               ? 'bg-blue-900 border-blue-900 text-white'
               : 'bg-white border-gray-300 text-neutral-400'
-          } rounded-3xl border text-center text-base font-bold py-3 px-20`}
+          } rounded-3xl border text-center text-base font-bold py-3 px-16`}
         />
         <Button
           onClick={() => handleButtonClick('증류수')}
@@ -54,7 +54,7 @@ export default function CategoryButton() {
             activeButton === '증류수'
               ? 'bg-blue-900 border-blue-900 text-white'
               : 'bg-white border-gray-300 text-neutral-400'
-          } rounded-3xl border text-center text-base font-bold py-3 px-20`}
+          } rounded-3xl border text-center text-base font-bold py-3 px-16`}
         />
         <Button
           onClick={() => handleButtonClick('기타')}
@@ -63,7 +63,7 @@ export default function CategoryButton() {
             activeButton === '기타'
               ? 'bg-blue-900 border-blue-900 text-white'
               : 'bg-white border-gray-300 text-neutral-400'
-          } rounded-3xl border text-center text-base font-bold py-3 px-20`}
+          } rounded-3xl border text-center text-base font-bold py-3 px-16`}
         />
       </div>
     </div>
