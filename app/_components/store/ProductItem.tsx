@@ -26,7 +26,7 @@ export default function ProductItem({
   detailCheck,
 }: ProductItemProps) {
   return (
-    <div className={`flex ${detailCheck ? 'flex-row' : 'flex-col'} gap-5`}>
+    <div className={`flex ${detailCheck ? 'flex-row' : 'flex-col'} w-full gap-5`}>
       <img
         src={image}
         className="bg-white rounded-lg border border-slate-700 border-opacity-20 py-10 px-28"
