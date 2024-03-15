@@ -1,6 +1,6 @@
 import React from 'react';
 import OrderItem from './OrderItem';
-import TabButton from './TabButton';
+import TabButton from '../TabButton';
 
 export default function ReviewWriteList() {
   return (
