@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
+
 import Button from './Button';
 
 interface PaginationProps {
@@ -27,7 +28,7 @@ export default function Pagination({
 
   useEffect(() => {
     setPageGroup(Math.ceil(page / pageRangeDisplayed));
-  }, [page, pageRangeDisplayed]);
+  }, [page]);
 
   return (
     <div className="flex flex-row justify-center items-center py-[40px]">
@@ -48,10 +49,13 @@ export default function Pagination({
       />
       <div className="flex gap-3">
         <Button
-          className="w-[35px] h-[35px] bg-slate-700 rounded-[36px] border border-slate-700 text-white text-xl font-normal font-['ABeeZee']"
+          className={`w-[35px] h-[35px] ${page === firstNum ? 'bg-slate-700 border-slate-700 text-white' : 'bg-white border-zinc-300 text-zinc-800'} rounded-[36px] border   text-xl font-normal font-['ABeeZee']`}
           buttonName="1"
-          onClick={() => setPage(firstNum)}
-          active={page === firstNum}
+          onClick={() => {
+            console.log('click 1');
+            setPage(firstNum);
+          }}
+          disabled={page === firstNum}
         />
         {Array(pageRangeDisplayed - 1)
           .fill(null)
@@ -61,10 +65,15 @@ export default function Pagination({
             }
             return (
               <Button
-                className="w-[35px] h-[35px] bg-white rounded-[36px] border border-zinc-300 text-zinc-800 text-xl font-normal font-['ABeeZee']"
+                className={`w-[35px] h-[35px] ${page === firstNum + 1 + i ? 'bg-slate-700 border-slate-700 text-white' : 'bg-white border-zinc-300 text-zinc-800'} rounded-[36px] border text-xl font-normal font-['ABeeZee']`}
                 buttonName={(firstNum + 1 + i).toString()}
-                onClick={() => setPage(firstNum + 1 + i)}
-                active={page === firstNum + 1 + i}
+                onClick={() => {
+                  setPage(() => {
+                    const page = firstNum + 1 + i;
+                    return page;
+                  });
+                }}
+                disabled={page === firstNum + 1 + i}
               />
             );
           })}
@@ -77,7 +86,6 @@ export default function Pagination({
             setPage((prevPage) => {
               const page = prevPage + 1;
               setPageGroup(Math.ceil(page / pageRangeDisplayed));
-
               return page;
             });
           }

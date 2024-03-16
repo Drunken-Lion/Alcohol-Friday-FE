@@ -8,11 +8,10 @@ import { JWT } from 'next-auth/jwt';
 const reissueToken = async (token: JWT) => {
   // const session = await getSession();
   // const refreshToken = session?.refreshToken;
+  console.log('reissueToken refreshToken: ' + token.refreshToken);
   const res = await serverInstance.post('/v1/auth/reissue-token', token.refreshToken, {
     headers: { 'Content-Type': 'text/plain' },
   });
-
-  console.log('reissueToken res: ' + res);
 
   return {
     ...token,

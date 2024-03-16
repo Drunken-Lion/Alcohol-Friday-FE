@@ -7,24 +7,15 @@ interface ButtonProps {
   buttonName: string;
   className: string;
   disabled?: boolean;
-  active?: boolean;
 }
 
-export default function Button({
-  type,
-  onClick,
-  buttonName,
-  className,
-  disabled,
-  active,
-}: ButtonProps) {
+export default function Button({ type, onClick, buttonName, className, disabled }: ButtonProps) {
   return (
     <button
       type={type ? type : 'button'}
       onClick={onClick}
       className={className}
       disabled={disabled}
-      aria-current={active}
     >
       {buttonName}
     </button>
