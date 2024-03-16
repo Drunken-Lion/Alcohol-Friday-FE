@@ -1,6 +1,4 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import ReactQueryProvider from './_hooks/useReactQuery';
 import { getServerSession } from 'next-auth';
 
 import AuthSession from './AuthSession';
@@ -9,7 +7,8 @@ import Footer from './_components/Footer';
 
 import './globals.css';
 
-const inter = Inter({ subsets: ['latin'] });
+import Head from 'next/head';
+import Script from 'next/script';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -18,16 +17,25 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession();
+
   return (
     <html lang="en">
+      {/* <Head>
+        <Script
+          strategy="beforeInteractive"
+          type="text/javascript"
+          src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=55o5aqry2f"
+          onError={(e) => {
+            console.error('Script failed to load', e);
+          }}
+        />
+      </Head> */}
       <body>
-        <ReactQueryProvider>
-          <AuthSession>
-            <Header />
-            {children}
-            {session && <Footer />}
-          </AuthSession>
-        </ReactQueryProvider>
+        <AuthSession>
+          <Header />
+          {children}
+          <Footer />
+        </AuthSession>
       </body>
     </html>
   );
