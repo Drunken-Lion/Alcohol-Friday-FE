@@ -47,6 +47,11 @@ export default function Quantity({ quantity, price }: QuantityProps) {
         </div>
       </div>
       <Button
+        buttonName="장바구니"
+        className="px-14 py-2.5 bg-gray-100 rounded justify-center items-center inline-flex text-center text-zinc-800 text-base font-normal my-2"
+        onClick={undefined}
+      />
+      <Button
         buttonName="구매하기"
         className="px-14 py-2.5 bg-slate-700 rounded justify-center items-center inline-flex text-center text-white text-base font-normal"
         onClick={undefined}
