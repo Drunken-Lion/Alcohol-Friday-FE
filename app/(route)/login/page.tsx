@@ -11,7 +11,6 @@ export default function login() {
   useEffect(() => {
     (async () => {
       const res: any = await getProviders();
-      console.log(res);
       setProviders(res);
     })();
   }, []);
@@ -26,7 +25,7 @@ export default function login() {
   };
 
   return (
-    <div className="flex flex-col items-center">
+    <div className="m-auto flex flex-col items-center">
       <p className="text-[40px] font-bold font-['Inter'] mt-24">로그인</p>
       <p className="text-base text-center mt-5">
         전통주 홈페이지에 오신걸 환영합니다! <br />

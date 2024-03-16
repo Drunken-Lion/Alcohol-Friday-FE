@@ -10,4 +10,12 @@ module.exports = {
 
     return config;
   },
+  rewrites: async () => {
+    return [
+      {
+        source: '/v1/:path*',
+        destination: `https://api.alcoholfriday.shop/v1/:path*`,
+      },
+    ];
+  },
 };
