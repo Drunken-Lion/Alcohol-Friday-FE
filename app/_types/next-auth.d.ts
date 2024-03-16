@@ -1,4 +1,5 @@
 import NextAuth from 'next-auth';
+import { Member } from './member';
 
 declare module 'next-auth' {
   /**
@@ -11,10 +12,22 @@ declare module 'next-auth' {
       email: string;
       name: string;
       nickname?: string;
+      phone: number;
       provider: string;
       createdAt: string;
       updatedAt: string;
       deletedAt?: string;
+    };
+  }
+}
+
+declare module 'next-auth/jwt' {
+  interface JWT {
+    token: {
+      accessToken: string;
+      accessTokenExp: number;
+      refreshToken: string;
+      member: Member;
     };
   }
 }

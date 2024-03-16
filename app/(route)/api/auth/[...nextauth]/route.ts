@@ -1,28 +1,25 @@
 import NextAuth, { NextAuthOptions } from 'next-auth';
+import { getSession } from 'next-auth/react';
 import KakaoProvider from 'next-auth/providers/kakao';
 
-import instance from 'app/_service/axios';
+import serverInstance from 'app/_service/axios-server';
+import { JWT } from 'next-auth/jwt';
 
-type Member = {
-  id: number;
-  email: string;
-  nickname?: string;
-  phone?: number;
-  provider: string;
-  createdAt: string;
-  updatedAt: string;
-  deletedAt?: string;
-};
+const reissueToken = async (token: JWT) => {
+  // const session = await getSession();
+  // const refreshToken = session?.refreshToken;
+  const res = await serverInstance.post('/v1/auth/reissue-token', token.refreshToken, {
+    headers: { 'Content-Type': 'text/plain' },
+  });
 
-type Jwt = {
-  accessToken: string;
-  accessTokenExp: number;
-  refreshToken: string;
-};
+  console.log('reissueToken res: ' + res);
 
-type Account = {
-  member: Member;
-  jwt: Jwt;
+  return {
+    ...token,
+    accessToken: res.data.accessToken,
+    accessTokenExp: res.data.accessTokenExp,
+    refreshToken: res.data.refreshToken ?? token.refreshToken,
+  };
 };
 
 export const authOptions: NextAuthOptions = {
@@ -37,48 +34,56 @@ export const authOptions: NextAuthOptions = {
     signOut: '/logout',
   },
   callbacks: {
-    async signIn({ account, profile }) {
-      // const url = `/v1/auth/login/${account?.provider}`;
-      const url = '/v1/auth/test';
-      // const res = await instance.post(url, account?.access_token);
-      const res = await instance.post(url, 'ekslws123@nate.com');
+    async signIn({ account }) {
+      const url = `/v1/auth/login/${account?.provider}`;
+      const token = account?.access_token;
+      const res = await serverInstance.post(url, token, {
+        headers: { 'Content-Type': 'text/plain' },
+      });
       if (res.status !== 200) {
-        // console.log(res);
         return false;
       }
 
       const data = res.data;
-      // console.log(data);
       account!!.memberResponse = data.memberResponse;
-      account!!.jwtResponse = data.jwtResponse;
       account!!.access_token = data.jwtResponse.accessToken;
       account!!.refresh_token = data.jwtResponse.refreshToken;
-      // console.log(account);
+      account!!.expires_at = data.jwtResponse.accessTokenExp;
 
       return true;
     },
     async jwt({ token, account }) {
-      console.log(account);
       if (account) {
-        token.accessToken = account.access_token;
-        token.refreshToken = account.refresh_token;
-        token.member = account.memberResponse;
+        return {
+          accessToken: account.access_token,
+          accessTokenExp: account.expires_at,
+          refreshToken: account.refresh_token,
+          member: account.memberResponse,
+        };
+        // token.accessToken = account.access_token;
+        // token.refreshToken = account.refresh_token;
+        // token.member = account.memberResponse;
       }
 
       /**
        * 리프레시 토큰 이용해서 액세스 토큰 재발급하는 로직 작성하는 곳
        */
-      console.log('token: ' + JSON.stringify(token));
-      return token;
-    },
-    async session({ session, token, user }) {
-      if (token.member) {
-        session.user = token.member;
+      console.log('date now: ' + Date.now());
+      console.log('accessTokenExp: ' + token.accessTokenExp);
+      if (Date.now() < token.accessTokenExp) {
+        return token;
       }
 
-      console.log('session info');
-      console.log(session);
+      return reissueToken(token);
+    },
+    async session({ session, token }) {
+      if (token.member) {
+        session.user = token.member;
+        session.accessToken = token.accessToken;
+        session.refreshToken = token.refreshToken;
+      }
 
+      console.log('session: [' + JSON.stringify(session) + ']');
       return session;
     },
   },
