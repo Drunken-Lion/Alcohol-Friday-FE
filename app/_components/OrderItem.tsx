@@ -1,6 +1,6 @@
 import React from 'react';
-import Button from '../Button';
-import Portal from '../Portal';
+import Button from './Button';
+import Portal from './Portal';
 import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
 
@@ -46,12 +46,14 @@ export default function OrderItem({
               <span className="px-1">/</span>
               <span>수량 {quantity}개</span>
             </div>
+
             {/* <Button
               className="flex justify-center py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900"
               buttonName="리뷰쓰기"
               type={undefined}
               onClick={onClick}
             ></Button> */}
+
             <Portal
               portalName="리뷰쓰기"
               className="flex justify-center py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900 cursor-grabbing"

@@ -8,7 +8,7 @@ import OrderStatus from 'app/_components/mypage/OrderStatus';
 import Question from 'app/_components/mypage/Question';
 import { useSession } from 'next-auth/react';
 import ReviewWriteList from 'app/_components/mypage/ReviewWriteList';
-import TabButton from 'app/_components/mypage/TabButton';
+import TabButton from 'app/_components/TabButton';
 
 export default function mypage() {
   const [selectedTab, setSelectedTab] = useState<string>('order');

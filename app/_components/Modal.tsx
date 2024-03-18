@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
-import OrderItem from './mypage/OrderItem';
+import OrderItem from './OrderItem';
 import ReviewRating from './mypage/ReviewRating';
 import Textarea from './Textarea';
 import Close from '/public/images/close.svg';
