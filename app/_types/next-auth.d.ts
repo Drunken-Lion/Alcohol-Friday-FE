@@ -19,6 +19,14 @@ declare module 'next-auth' {
       deletedAt?: string;
     };
   }
+
+  // interface Account {
+  //   provider: string;
+  //   accessToken: string;
+  //   accessTokenExp: number;
+  //   refreshToken: string;
+  //   memberResponse: Member;
+  // }
 }
 
 declare module 'next-auth/jwt' {
@@ -27,7 +35,6 @@ declare module 'next-auth/jwt' {
       accessToken: string;
       accessTokenExp: number;
       refreshToken: string;
-      member: Member;
     };
   }
 }

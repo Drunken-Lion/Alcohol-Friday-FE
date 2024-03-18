@@ -8,6 +8,7 @@ import { JWT } from 'next-auth/jwt';
 const reissueToken = async (token: JWT) => {
   // const session = await getSession();
   // const refreshToken = session?.refreshToken;
+  console.log(token);
   console.log('reissueToken refreshToken: ' + token.refreshToken);
   const res = await serverInstance.post('/v1/auth/reissue-token', token.refreshToken, {
     headers: { 'Content-Type': 'text/plain' },
@@ -34,8 +35,11 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ account }) {
-      const url = `/v1/auth/login/${account?.provider}`;
-      const token = account?.access_token;
+      // const url = `/v1/auth/login/${account?.provider}`;
+      const url = '/v1/auth/test';
+      // const token = account?.access_token;
+      const token = 'member1@af.shop';
+      console.log(token);
       const res = await serverInstance.post(url, token, {
         headers: { 'Content-Type': 'text/plain' },
       });
@@ -48,20 +52,31 @@ export const authOptions: NextAuthOptions = {
       account!!.access_token = data.jwtResponse.accessToken;
       account!!.refresh_token = data.jwtResponse.refreshToken;
       account!!.expires_at = data.jwtResponse.accessTokenExp;
+      // account!!.accessToken = data.jwtResponse.accessToken;
+      // account!!.refreshToken = data.jwtResponse.refreshToken;
+      // account!!.accessTokenExp = data.jwtResponse.accessTokenExp;
 
       return true;
     },
     async jwt({ token, account }) {
+      // if (account) {
+      //   return {
+      //     accessToken: account.access_token,
+      //     accessTokenExp: account.expires_at,
+      //     refreshToken: account.refresh_token,
+      //     member: account.memberResponse,
+      //   };
+      //   // token.accessToken = account.access_token;
+      //   // token.refreshToken = account.refresh_token;
+      //   // token.member = account.memberResponse;
+      // }
       if (account) {
-        return {
-          accessToken: account.access_token,
-          accessTokenExp: account.expires_at,
-          refreshToken: account.refresh_token,
-          member: account.memberResponse,
-        };
-        // token.accessToken = account.access_token;
-        // token.refreshToken = account.refresh_token;
-        // token.member = account.memberResponse;
+        token.accessToken = account?.access_token;
+        token.accessTokenExp = account?.expires_at;
+        token.refreshToken = account?.refresh_token;
+        token.member = account?.memberResponse;
+
+        return token;
       }
 
       /**
@@ -69,6 +84,7 @@ export const authOptions: NextAuthOptions = {
        */
       console.log('date now: ' + Date.now());
       console.log('accessTokenExp: ' + token.accessTokenExp);
+      console.log('refreshToken: ' + token.refreshToken);
       if (Date.now() < token.accessTokenExp) {
         return token;
       }

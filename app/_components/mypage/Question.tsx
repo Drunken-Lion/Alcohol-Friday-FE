@@ -31,7 +31,7 @@ export default function Question() {
   const [totalCount, setTotalCount] = useState(0);
 
   const getQuestions = async (page = 0, size = 10) => {
-    const url = `/v1/questions?page=${page}&size=${size}`;
+    const url = `/v1/members/me/questions?page=${page}&size=${size}`;
     const res = await clientInstance.get(url);
 
     return res.data;

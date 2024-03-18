@@ -64,13 +64,13 @@ export default function Member() {
         disabled
         value={member?.name}
       />
-      <label htmlFor="birth">생년월일</label>
+      {/* <label htmlFor="birth">생년월일</label>
       <input
         type="text"
         name="birth"
         className="border border-slate-300 rounded-md w-full h-[50px] bg-white border-solid border-[rgba(56.18, 70.02, 95.62, 0.15)] text-[#999999] pl-3"
         disabled
-      />
+      /> */}
       <label htmlFor="phone">
         휴대전화 <span className="text-red-500"> *</span>
       </label>
