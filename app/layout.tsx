@@ -6,6 +6,8 @@ import AuthSession from './AuthSession';
 import Header from './_components/Header';
 import Footer from './_components/Footer';
 
+import { authOptions } from './(route)/api/auth/[...nextauth]/route';
+
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -14,7 +16,8 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession();
+  const session = await getServerSession(authOptions);
+  console.log('layout session ', session);
   return (
     <html lang="en">
       <body>

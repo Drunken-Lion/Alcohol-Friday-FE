@@ -43,7 +43,7 @@ export default function Modal({ onClose }: ModalProps) {
             subTitle="[500ml] 어린꿀술"
             price=""
             quantity={0}
-            isValue={false}
+            isReview={false}
           />
           <div className="flex flex-col gap-5 pt-10">
             <p className="text-zinc-800 text-lg font-normal text-start">

@@ -89,78 +89,76 @@ export default function Question() {
   }
 
   return (
-    <div className="m-auto w-9/12 py-7">
-      <div className="mx-5">
-        <div className="flex gap-6">
-          <TabButton
-            onClick={() => handleClickTab('문의내역')}
-            buttonName="문의내역"
-            selectedTab={tabName}
-          />
-          <TabButton
-            onClick={() => handleClickTab('문의하기')}
-            buttonName="문의하기"
-            selectedTab={tabName}
-          />
-        </div>
-        <p className="text-neutral-400 text-base font-normal font-['ABeeZee'] mb-7">
-          ※ 회원님이 작성하신 문의를 최신순으로 확인할 수 있습니다.
-          <br />※ 답변완료 상태의 글은 삭제할 수 없습니다.
-        </p>
-        {tabName === '문의하기' && <QuestionWrite />}
-        {tabName === '문의내역' && (
-          <>
-            <table className="table-bordered w-full text-center">
-              <thead>
-                <tr>
-                  <th className="w-16"></th>
-                  <th>등록일자</th>
-                  <th>제목</th>
-                  <th>답변여부</th>
-                </tr>
-              </thead>
-              <tbody>
-                {data.map((item: Question, i: number) => (
-                  <tr key={i}>
-                    <td>
-                      {item.status === 'INCOMPLETE' && (
-                        // <Checkbox
-                        //   className="w-5 h-5 rounded bg-white border-solid border-[#38465f]"
-                        //   onChange={() => handleClickCheckBox(item.id)}
-                        //   label={''}
-                        //   dataName={''}
-                        //   value={''}
-                        // />
-                        <input
-                          type="checkbox"
-                          className="w-4 h-4 rounded bg-white border-solid border-[#38465f]"
-                          onClick={() => handleClickCheckBox(item.id)}
-                        />
-                      )}
-                    </td>
-                    <td>{dateFormat(item.createdAt)}</td>
-                    <td>{item.title}</td>
-                    <td>{item.status === 'COMPLETE' ? '답변완료' : '접수'}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-            <div className="flex justify-end">
-              <Button
-                buttonName="삭제"
-                className="w-[175px] h-[50px] mt-7 bg-[#384660] rounded-[10px] font-normal font-['ABeeZee'] text-white text-base"
-                onClick={handleClickDelete}
-              />
-            </div>
-            <Pagination
-              totalCount={totalCount}
-              pageRangeDisplayed={pageRangeDisplayed}
-              page={pageNum}
-              setPage={setPageNum}
-            />
-          </>
-        )}
+    <div className="flex flex-col w-9/12 m-auto">
+      <div className="flex gap-6 ml-5">
+        <TabButton
+          onClick={() => handleClickTab('문의내역')}
+          buttonName="문의내역"
+          selectedTab={tabName}
+        />
+        <TabButton
+          onClick={() => handleClickTab('문의하기')}
+          buttonName="문의하기"
+          selectedTab={tabName}
+        />
       </div>
+      <p className="text-neutral-400 text-base font-normal font-['ABeeZee'] mb-7 ml-5">
+        ※ 회원님이 작성하신 문의를 최신순으로 확인할 수 있습니다.
+        <br />※ 답변완료 상태의 글은 삭제할 수 없습니다.
+      </p>
+      {tabName === '문의하기' && <QuestionWrite />}
+      {tabName === '문의내역' && (
+        <>
+          <table className="table-bordered w-full text-center ml-5">
+            <thead>
+              <tr>
+                <th className="w-16"></th>
+                <th>등록일자</th>
+                <th>제목</th>
+                <th>답변여부</th>
+              </tr>
+            </thead>
+            <tbody>
+              {data.map((item: Question, i: number) => (
+                <tr key={i}>
+                  <td>
+                    {item.status === 'INCOMPLETE' && (
+                      // <Checkbox
+                      //   className="w-5 h-5 rounded bg-white border-solid border-[#38465f]"
+                      //   onChange={() => handleClickCheckBox(item.id)}
+                      //   label={''}
+                      //   dataName={''}
+                      //   value={''}
+                      // />
+                      <input
+                        type="checkbox"
+                        className="w-4 h-4 rounded bg-white border-solid border-[#38465f]"
+                        onClick={() => handleClickCheckBox(item.id)}
+                      />
+                    )}
+                  </td>
+                  <td>{dateFormat(item.createdAt)}</td>
+                  <td>{item.title}</td>
+                  <td>{item.status === 'COMPLETE' ? '답변완료' : '접수'}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+          <div className="flex justify-end">
+            <Button
+              buttonName="삭제"
+              className="w-[175px] h-[50px] mt-7 bg-[#384660] rounded-[10px] font-normal font-['ABeeZee'] text-white text-base"
+              onClick={handleClickDelete}
+            />
+          </div>
+          <Pagination
+            totalCount={totalCount}
+            pageRangeDisplayed={pageRangeDisplayed}
+            page={pageNum}
+            setPage={setPageNum}
+          />
+        </>
+      )}
     </div>
   );
 }

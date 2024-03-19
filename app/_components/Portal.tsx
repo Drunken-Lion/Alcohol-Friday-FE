@@ -10,7 +10,6 @@ interface PortalProps {
 
 export default function Portal({ portalName, className }: PortalProps) {
   const [showModal, setShowModal] = useState(false);
-  console.log(showModal);
 
   return (
     <div>
@@ -19,7 +18,10 @@ export default function Portal({ portalName, className }: PortalProps) {
       </div>
       {showModal &&
         createPortal(
-          <Modal onClose={() => setShowModal(false)} />,
+          <>
+            <div className="fixed left-0 top-0 z-20 h-full w-full bg-slate-600 bg-opacity-70" />
+            <Modal onClose={() => setShowModal(false)} />
+          </>,
           document.body.appendChild(document.createElement('div')),
         )}
     </div>
