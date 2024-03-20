@@ -6,9 +6,7 @@ interface ProductItemProps {
   image: string;
   name: string;
   category: string;
-  price: string;
-  discountRate: number;
-  discountPrice: string;
+  price: number;
   reviewPoint: number;
   reviewCount: number;
   detailCheck?: boolean;
@@ -19,17 +17,17 @@ export default function ProductItem({
   name,
   category,
   price,
-  discountRate,
-  discountPrice,
   reviewPoint,
   reviewCount,
   detailCheck,
 }: ProductItemProps) {
+  const formattedPrice: string = price.toLocaleString('ko-KR');
+
   return (
     <div className={`flex ${detailCheck ? 'flex-row' : 'flex-col'} w-full gap-5`}>
       <img
         src={image}
-        className="bg-white rounded-lg border border-slate-700 border-opacity-20 py-10 px-28"
+        className="rounded-lg border border-slate-700 border-opacity-20 py-10 px-36"
       />
       {detailCheck ? (
         <div>
@@ -41,30 +39,22 @@ export default function ProductItem({
               onStarClick={undefined}
               isShow={true}
             />
-            <span className="text-neutral-400 text-xl font-normal">
-              {reviewPoint} ({reviewCount})
-            </span>
+            <div className="text-neutral-400 text-xl font-normal">
+              {reviewPoint}({reviewCount})
+            </div>
           </div>
-          <p className="text-gray-300 text-xl font-normal line-through">{price}</p>
-          <div className="flex gap-2">
-            <span className="text-red-500 text-3xl font-bold">{discountRate}%</span>
-            <span className="text-zinc-800 text-3xl font-bold">{discountPrice}</span>
-          </div>
+          <span className="text-zinc-800 text-3xl font-bold">{formattedPrice}원</span>
         </div>
       ) : (
         <div>
           <p className="text-zinc-800 text-xl font-normal">{name}</p>
           <p className="text-stone-500 text-base font-normal py-2">{category}</p>
-          <p className="text-gray-300 text-base font-normal line-through">{price}</p>
-          <div className="flex gap-2">
-            <span className="text-red-500 text-2xl font-bold">{discountRate}%</span>
-            <span className="text-zinc-800 text-2xl font-bold">{discountPrice}</span>
-          </div>
+          <span className="text-zinc-800 text-2xl font-bold">{formattedPrice}원</span>
           <div className="flex pt-2 gap-1">
             <Star />
-            <span className="text-neutral-400 text-base font-normal">
+            <div className="text-neutral-400 text-base font-normal">
               {reviewPoint} ({reviewCount})
-            </span>
+            </div>
           </div>
         </div>
       )}

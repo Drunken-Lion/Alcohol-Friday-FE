@@ -1,12 +1,10 @@
 import type { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
-
+import ReactQueryProvider from './_hooks/useReactQuery';
 import AuthSession from './AuthSession';
 import Header from './_components/Header';
 import Footer from './_components/Footer';
-
 import './globals.css';
-
 import Head from 'next/head';
 import Script from 'next/script';
 
@@ -17,10 +15,10 @@ export const metadata: Metadata = {
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
   const session = await getServerSession();
-
   return (
     <html lang="en">
-      {/* <Head>
+      <body>
+        {/* <Head>
         <Script
           strategy="beforeInteractive"
           type="text/javascript"
@@ -30,12 +28,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           }}
         />
       </Head> */}
-      <body>
-        <AuthSession>
-          <Header />
-          {children}
-          <Footer />
-        </AuthSession>
+        <ReactQueryProvider>
+          <AuthSession>
+            <Header />
+            {children}
+            {session && <Footer />}
+          </AuthSession>
+        </ReactQueryProvider>
       </body>
     </html>
   );
