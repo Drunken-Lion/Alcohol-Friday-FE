@@ -26,10 +26,12 @@ const getSessionBeforeRequest = async () => {
 
 serverInstance.interceptors.request.use(
   async (config) => {
-    const session = await getSessionBeforeRequest();
-    console.log('axios server session ', session);
-    if (session && config.url !== '/v1/auth/reissue-token') {
-      config.headers['Authorization'] = `Bearer ${session.accessToken}`;
+    if (config.url !== '/v1/auth/reissue-token') {
+      const session = await getSessionBeforeRequest();
+      if (session) {
+        console.log('axios server session ', session);
+        config.headers['Authorization'] = `Bearer ${session.accessToken}`;
+      }
     }
 
     return config;

@@ -20,6 +20,7 @@ export default function ReviewCompleteList({ reviews }: Props) {
             title={review.orderDetail.itemName}
             price={review.orderDetail.itemPrice.toLocaleString('ko-KR')}
             quantity={review.orderDetail.quantity}
+            score={review.score}
             image="../images/alcohol.png"
             isReview={true}
             isReviewComplete={true}
