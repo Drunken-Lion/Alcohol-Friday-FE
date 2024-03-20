@@ -20,7 +20,7 @@ export default function HandlingStore({
 }: HandlingStoreProps) {
   return (
     <div>
-      <p className="text-zinc-800 text-xl font-bold mt-20 mb-5">내 주변 취급 점포</p>
+      <p className="text-zinc-800 text-xl font-bold mb-5">내 주변 취급 점포</p>
       <div className="border border-slate-700 border-opacity-20 text-center rounded-[10px]">
         <table className="table-fixed w-full ">
           <thead>

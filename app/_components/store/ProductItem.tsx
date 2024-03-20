@@ -53,7 +53,7 @@ export default function ProductItem({
           <div className="flex pt-2 gap-1">
             <Star />
             <div className="text-neutral-400 text-base font-normal">
-              {reviewPoint} ({reviewCount})
+              {reviewPoint}({reviewCount})
             </div>
           </div>
         </div>

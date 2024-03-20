@@ -3,21 +3,27 @@ import React, { useState } from 'react';
 import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
 import Button from '../Button';
+import Link from 'next/link';
 
 interface QuantityProps {
   quantity: number;
-  price: string;
+  price: number;
 }
 
 export default function Quantity({ quantity, price }: QuantityProps) {
   const [newQuantity, setNewQuantity] = useState<number>(quantity);
+  const [newPrice, setNewPrice] = useState<number>(price);
+
+  const formattedPrice: string = newPrice.toLocaleString('ko-KR');
 
   const handleMinus = () => {
     if (newQuantity < 2) return;
     setNewQuantity(newQuantity - 1);
+    setNewPrice(newPrice - price);
   };
   const handlePlus = () => {
     setNewQuantity(newQuantity + 1);
+    setNewPrice(price + newPrice);
   };
 
   return (
@@ -43,17 +49,19 @@ export default function Quantity({ quantity, price }: QuantityProps) {
       <div className="my-16">
         <p className="text-zinc-800 text-base font-bold pb-4">총 상품 가격</p>
         <div className="rounded border border-gray-300 text-center text-stone-500 text-base font-bold py-3">
-          {price}원
+          {formattedPrice}원
         </div>
       </div>
-      <Button
-        buttonName="장바구니"
-        className="px-14 py-2.5 bg-gray-100 rounded justify-center items-center inline-flex text-center text-zinc-800 text-base font-normal my-2"
-        onClick={undefined}
-      />
+      <Link href={'/carts'}>
+        <Button
+          buttonName="장바구니"
+          className="w-full px-14 py-2.5 bg-gray-100 rounded justify-center items-center inline-flex text-center text-zinc-800 text-base font-normal my-2"
+          onClick={undefined}
+        />
+      </Link>
       <Button
         buttonName="구매하기"
-        className="px-14 py-2.5 bg-slate-700 rounded justify-center items-center inline-flex text-center text-white text-base font-normal"
+        className="w-full px-14 py-2.5 bg-slate-700 rounded justify-center items-center inline-flex text-center text-white text-base font-normal"
         onClick={undefined}
       />
     </div>
