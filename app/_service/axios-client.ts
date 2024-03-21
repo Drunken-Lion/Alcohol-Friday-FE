@@ -13,7 +13,7 @@ const clientInstance = axios.create({
 clientInstance.interceptors.request.use(
   async (config) => {
     const session = await getSession();
-    console.log(session);
+    console.log('client axios session : ' + session);
     if (session && config.url !== '/v1/auth/reissue-token') {
       config.headers['Authorization'] = `Bearer ${session.accessToken}`;
     }

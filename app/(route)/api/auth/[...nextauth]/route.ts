@@ -32,8 +32,8 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   pages: {
-    signIn: '/login',
-    signOut: '/logout',
+    signIn: '/auth/login',
+    signOut: '/auth/logout',
   },
   callbacks: {
     async signIn({ account }) {
