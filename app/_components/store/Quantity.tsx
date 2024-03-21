@@ -4,6 +4,7 @@ import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
 import Button from '../Button';
 import Link from 'next/link';
+import useCart from 'app/_hooks/useCart';
 
 interface QuantityProps {
   quantity: number;
@@ -11,6 +12,8 @@ interface QuantityProps {
 }
 
 export default function Quantity({ quantity, price }: QuantityProps) {
+  const { addCart } = useCart();
+  const itemId = 2;
   const [newQuantity, setNewQuantity] = useState<number>(quantity);
   const [newPrice, setNewPrice] = useState<number>(price);
 
@@ -24,6 +27,15 @@ export default function Quantity({ quantity, price }: QuantityProps) {
   const handlePlus = () => {
     setNewQuantity(newQuantity + 1);
     setNewPrice(price + newPrice);
+  };
+
+  const handleCartClick = () => {
+    const product = { itemId, quantity: newQuantity };
+    addCart.mutate(product, {
+      onSuccess: () => {
+        window.alert('장바구니에 추가되었습니다.');
+      },
+    });
   };
 
   return (
@@ -56,7 +68,7 @@ export default function Quantity({ quantity, price }: QuantityProps) {
         <Button
           buttonName="장바구니"
           className="w-full px-14 py-2.5 bg-gray-100 rounded justify-center items-center inline-flex text-center text-zinc-800 text-base font-normal my-2"
-          onClick={undefined}
+          onClick={handleCartClick}
         />
       </Link>
       <Button
