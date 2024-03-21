@@ -10,11 +10,11 @@ type ImageThumbnailProps = {
 
 export default function ImageThumbnail({ files, deleteFileHandler }: ImageThumbnailProps) {
   return files.map((file) => (
-    <div className="w-[120px] h-[120px] bg-white rounded-[10px] border border-neutral-400">
+    <div className="w-[120px] h-[120px] bg-white rounded-[10px] border border-neutral-400 relative">
       <MdCancel
         color="#D9D9D9"
         onClick={() => deleteFileHandler(file.name)}
-        className="cursor-grabbing"
+        className="cursor-grabbing absolute top-1 right-1"
       />
       <Image
         width={120}

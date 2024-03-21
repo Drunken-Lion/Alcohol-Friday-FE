@@ -9,7 +9,6 @@ type Props = {
 };
 
 export default function ReviewCompleteList({ reviews }: Props) {
-  console.log(reviews);
   return reviews.length === 0 ? (
     <div>작성한 리뷰가 없습니다.</div>
   ) : (
@@ -17,6 +16,7 @@ export default function ReviewCompleteList({ reviews }: Props) {
       <React.Fragment key={i}>
         <div className="border rounded-md border-slate-700 border-opacity-20 p-7 w-[628px]">
           <OrderItem
+            orderDetailId={review.orderDetail.orderDetailId}
             title={review.orderDetail.itemName}
             price={review.orderDetail.itemPrice.toLocaleString('ko-KR')}
             quantity={review.orderDetail.quantity}

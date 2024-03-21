@@ -6,7 +6,7 @@ export type ReviewsUnwritten = {
   file?: FileInfo;
 };
 
-type FileInfo = {
+export type FileInfo = {
   file: File[];
   entityId: number;
   entityType: string;

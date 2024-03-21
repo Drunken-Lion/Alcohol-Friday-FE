@@ -89,6 +89,7 @@ export default function ReviewWriteList() {
                 <React.Fragment key={i}>
                   <div className="border rounded-md border-slate-700 border-opacity-20 p-7 w-[628px]">
                     <OrderItem
+                      orderDetailId={review.orderDetailId}
                       title={review.itemName}
                       price={review.itemPrice.toLocaleString('ko-KR')}
                       quantity={review.quantity}
