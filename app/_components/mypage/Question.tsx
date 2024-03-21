@@ -10,6 +10,7 @@ import dayjs from 'dayjs';
 import clientInstance from 'app/_service/axios-client';
 import TabButton from './TabButton';
 import QuestionWrite from './QuestionWrite';
+import { dateFormat } from 'app/_utils/common';
 
 type Question = {
   id: number;
@@ -22,17 +23,16 @@ export default function Question() {
   const [pageRangeDisplayed, setPageRangeDisplayed] = useState<number>(10);
   const [pageNum, setPageNum] = useState<number>(1);
   const [limitPerPage, setLimitPerpage] = useState<number>(10);
-  const [checkedIds, setCheckedIds] = useState<Array<number>>([]);
-  const { data: session } = useSession();
-
-  const [tabName, setTabName] = useState<string>('문의내역');
+  const [checkedIds, setCheckedIds] = useState<number[]>([]);
+  const [tabName, setTabName] = useState('문의내역');
+  const [pageType, setPageType] = useState('list');
 
   const [data, setData] = useState([]);
   const [totalCount, setTotalCount] = useState(0);
 
   const getQuestions = async (page = 0, size = 10) => {
-    const url = `/v1/members/me/questions?page=${page}&size=${size}`;
-    const res = await clientInstance.get(url);
+    const url = '/v1/members/me/questions';
+    const res = await clientInstance.get(url, { params: { page, size } });
 
     return res.data;
   };
@@ -76,13 +76,15 @@ export default function Question() {
     }
   };
 
-  const dateFormat = (date: string) => {
-    return dayjs(date).format('YYYY-MM-DD');
-  };
+  // const dateFormat = (date: string) => {
+  //   return dayjs(date).format('YYYY-MM-DD');
+  // };
 
   const handleClickTab = (buttonName: string) => {
     setTabName(buttonName);
   };
+
+  const handleClickTitle = (id: number) => {};
 
   if (isLoading) {
     return <div>loading ...</div>;
@@ -123,13 +125,6 @@ export default function Question() {
                 <tr key={i}>
                   <td>
                     {item.status === 'INCOMPLETE' && (
-                      // <Checkbox
-                      //   className="w-5 h-5 rounded bg-white border-solid border-[#38465f]"
-                      //   onChange={() => handleClickCheckBox(item.id)}
-                      //   label={''}
-                      //   dataName={''}
-                      //   value={''}
-                      // />
                       <input
                         type="checkbox"
                         className="w-4 h-4 rounded bg-white border-solid border-[#38465f]"
@@ -137,8 +132,13 @@ export default function Question() {
                       />
                     )}
                   </td>
-                  <td>{dateFormat(item.createdAt)}</td>
-                  <td>{item.title}</td>
+                  <td>{dateFormat(item.createdAt, 'YYYY-MM-DD')}</td>
+                  <td
+                    className="cursor-grabbing hover:text-red-400"
+                    onClick={() => handleClickTitle(item.id)}
+                  >
+                    {item.title}
+                  </td>
                   <td>{item.status === 'COMPLETE' ? '답변완료' : '접수'}</td>
                 </tr>
               ))}

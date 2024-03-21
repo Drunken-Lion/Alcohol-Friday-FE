@@ -5,9 +5,8 @@ import ReviewRating from './ReviewRating';
 import { FaStar } from 'react-icons/fa';
 
 interface OrderItemProps {
-  storeName?: string;
+  orderDetailId: number;
   title?: string;
-  subTitle?: string;
   price?: string;
   quantity?: number;
   score?: number;
@@ -19,9 +18,8 @@ interface OrderItemProps {
 }
 
 export default function OrderItem({
-  storeName,
+  orderDetailId,
   title,
-  subTitle,
   price,
   quantity,
   score,
@@ -68,12 +66,14 @@ export default function OrderItem({
                   {reviewText}
                 </span>
                 <Portal
+                  orderDetailId={orderDetailId}
                   portalName="리뷰수정"
                   className="flex justify-center mt-10 py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900 cursor-grabbing"
                 />
               </div>
             ) : (
               <Portal
+                orderDetailId={orderDetailId}
                 portalName="리뷰쓰기"
                 className="flex justify-center mt-[76px] py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900 cursor-grabbing"
               />
