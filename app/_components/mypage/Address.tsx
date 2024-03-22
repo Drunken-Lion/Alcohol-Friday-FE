@@ -49,7 +49,6 @@ export default function Address() {
 
   useEffect(() => {
     if (queryData) {
-      console.log(queryData);
       setData(queryData);
     }
   }, [queryData]);

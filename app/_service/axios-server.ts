@@ -1,10 +1,6 @@
 import { getSession } from 'next-auth/react';
 
 import axios from 'axios';
-import { GetServerSideProps } from 'next';
-import { getToken } from 'next-auth/jwt';
-import { getServerSession } from 'next-auth';
-import { authOptions } from 'app/(route)/api/auth/[...nextauth]/route';
 
 const serverInstance = axios.create({
   baseURL: process.env.REACT_APP_API_BASEURL,
@@ -15,7 +11,6 @@ const serverInstance = axios.create({
 
 const getSessionBeforeRequest = async () => {
   try {
-    // const session = await getServerSession(authOptions.session);
     const session = await getSession();
     return session;
   } catch (error) {
