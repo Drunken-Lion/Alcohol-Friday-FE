@@ -76,19 +76,15 @@ export default function Question() {
     }
   };
 
-  // const dateFormat = (date: string) => {
-  //   return dayjs(date).format('YYYY-MM-DD');
-  // };
-
   const handleClickTab = (buttonName: string) => {
     setTabName(buttonName);
   };
 
   const handleClickTitle = (id: number) => {};
 
-  if (isLoading) {
-    return <div>loading ...</div>;
-  }
+  // if (isLoading) {
+  //   return <div>loading ...</div>;
+  // }
 
   return (
     <div className="flex flex-col w-9/12 m-auto">
@@ -104,13 +100,14 @@ export default function Question() {
           selectedTab={tabName}
         />
       </div>
-      <p className="text-neutral-400 text-base font-normal font-['ABeeZee'] mb-7 ml-5">
-        ※ 회원님이 작성하신 문의를 최신순으로 확인할 수 있습니다.
-        <br />※ 답변완료 상태의 글은 삭제할 수 없습니다.
-      </p>
-      {tabName === '문의하기' && <QuestionWrite />}
-      {tabName === '문의내역' && (
+      {tabName === '문의하기' ? (
+        <QuestionWrite />
+      ) : (
         <>
+          <p className="text-neutral-400 text-base font-normal font-['ABeeZee'] mb-7 ml-5">
+            ※ 회원님이 작성하신 문의를 최신순으로 확인할 수 있습니다.
+            <br />※ 답변완료 상태의 글은 삭제할 수 없습니다.
+          </p>
           <table className="table-bordered w-full text-center ml-5">
             <thead>
               <tr>
@@ -121,27 +118,35 @@ export default function Question() {
               </tr>
             </thead>
             <tbody>
-              {data.map((item: Question, i: number) => (
-                <tr key={i}>
-                  <td>
-                    {item.status === 'INCOMPLETE' && (
-                      <input
-                        type="checkbox"
-                        className="w-4 h-4 rounded bg-white border-solid border-[#38465f]"
-                        onClick={() => handleClickCheckBox(item.id)}
-                      />
-                    )}
+              {data.length !== 0 ? (
+                data.map((item: Question, i: number) => (
+                  <tr key={i}>
+                    <td>
+                      {item.status === 'INCOMPLETE' && (
+                        <input
+                          type="checkbox"
+                          className="w-4 h-4 rounded bg-white border-solid border-[#38465f]"
+                          onClick={() => handleClickCheckBox(item.id)}
+                        />
+                      )}
+                    </td>
+                    <td>{dateFormat(item.createdAt, 'YYYY-MM-DD')}</td>
+                    <td
+                      className="cursor-grabbing hover:text-red-400"
+                      onClick={() => handleClickTitle(item.id)}
+                    >
+                      {item.title}
+                    </td>
+                    <td>{item.status === 'COMPLETE' ? '답변완료' : '접수'}</td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={4} align="center">
+                    문의하신 내역이 없어요 !
                   </td>
-                  <td>{dateFormat(item.createdAt, 'YYYY-MM-DD')}</td>
-                  <td
-                    className="cursor-grabbing hover:text-red-400"
-                    onClick={() => handleClickTitle(item.id)}
-                  >
-                    {item.title}
-                  </td>
-                  <td>{item.status === 'COMPLETE' ? '답변완료' : '접수'}</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
           <div className="flex justify-end">
