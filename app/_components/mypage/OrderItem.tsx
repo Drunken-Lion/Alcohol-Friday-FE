@@ -1,7 +1,5 @@
 import React from 'react';
-import Button from '../Button';
 import Portal from '../Portal';
-import ReviewRating from './ReviewRating';
 import { FaStar } from 'react-icons/fa';
 
 interface OrderItemProps {
@@ -53,13 +51,13 @@ export default function OrderItem({
             </div>
           )}
         </div>
+        <div className="text-stone-500 text-sm font-normal">
+          <span>{price}</span>
+          <span className="px-1">/</span>
+          <span>수량 {quantity}개</span>
+        </div>
         {isReview && (
           <div>
-            <div className="text-stone-500 text-sm font-normal">
-              <span>{price}</span>
-              <span className="px-1">/</span>
-              <span>수량 {quantity}개</span>
-            </div>
             {isReviewComplete ? (
               <div className="pt-3">
                 <span className="text-[#333333] text-base font-normal font-['Pretendard']">

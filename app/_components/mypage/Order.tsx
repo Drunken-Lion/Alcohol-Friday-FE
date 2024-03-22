@@ -42,8 +42,11 @@ export default function Order() {
       <OrderStatus count={totalCount} />
       <div className="flex flex-col gap-3">
         {data.length === 0 ? (
-          <div>
-            주문내역이 없네요 ! <Link href="/store">주문하러 가기</Link>
+          <div className="m-auto">
+            주문내역이 없네요 !{' '}
+            <Link href="/store" className="text-red-400 decoration-solid">
+              주문하러 가기
+            </Link>
           </div>
         ) : (
           data.map((item, i) => (
@@ -67,7 +70,7 @@ export default function Order() {
                 </span>
               </div>
               <div className="text-[#B55849] text-base font-['Pretendard'] mt-5">
-                {getOrderStatus(item.orderStatus)}
+                {getOrderStatus(item.orderStatus)[0]}
               </div>
               <div className="w-full bg-white rounded-md border border-[#EEEEEE] border-solid mt-5 pt-7 pb-6 px-7">
                 {item.orderDetails.map((orderDetail, i) => (
@@ -83,10 +86,12 @@ export default function Order() {
                       </div>
                       <div className="flex justify-center w-0 h-40 border border-zinc-100" />
                       <div className="flex flex-col gap-4 justify-center">
-                        <Button
-                          buttonName="반품신청"
-                          className="w-[180px] h-[35px] bg-white rounded-lg border border-gray-300 text-center text-stone-500 text-sm font-normal font-['Pretendard']"
-                        />
+                        {getOrderStatus(item.orderStatus)[1] !== '' && (
+                          <Button
+                            buttonName={getOrderStatus(item.orderStatus)[1]}
+                            className="w-[180px] h-[35px] bg-white rounded-lg border border-gray-300 text-center text-stone-500 text-sm font-normal font-['Pretendard']"
+                          />
+                        )}
                         <Button
                           buttonName="판매자 문의"
                           className="w-[180px] h-[35px] bg-white rounded-lg border border-gray-300 text-center text-stone-500 text-sm font-normal font-['Pretendard']"
@@ -104,7 +109,7 @@ export default function Order() {
                   <div className="text-zinc-800 text-xl font-normal font-['Pretendard'] mt-5">
                     받는 분 정보
                   </div>
-                  <div className="flex flex-col w-[580px] h-[157px] bg-white rounded-md border border-[#EEEEEE] border-solid mt-5 p-6 gap-4">
+                  <div className="flex flex-col w-[580px] h-[150px] bg-white rounded-md border border-[#EEEEEE] border-solid mt-5 p-6 gap-4">
                     <div className="flex flex-row gap-6">
                       <span className="text-neutral-400 text-base font-normal font-['Pretendard']">
                         받는분
@@ -174,7 +179,7 @@ export default function Order() {
                     </div>
                     <div className="flex justify-end">
                       <span className="text-neutral-400 text-sm font-normal font-['Pretendard']">
-                        ({dateFormat(item.createdAt, `YYYY년 MM월 DD일 / hh:mm`)})
+                        ({dateFormat(item.createdAt, `YYYY년 MM월 DD일 / HH:mm`)})
                       </span>
                     </div>
                   </div>
