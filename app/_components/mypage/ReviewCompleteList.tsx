@@ -10,7 +10,7 @@ type Props = {
 
 export default function ReviewCompleteList({ reviews }: Props) {
   return reviews.length === 0 ? (
-    <div>작성한 리뷰가 없습니다.</div>
+    <div>작성한 리뷰가 없어요 !</div>
   ) : (
     reviews.map((review, i: number) => (
       <React.Fragment key={i}>
