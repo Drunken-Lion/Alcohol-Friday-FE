@@ -83,7 +83,7 @@ export default function ReviewWriteList() {
           {tabName === '작성한 리뷰' && <ReviewCompleteList reviews={reviews} />}
           {tabName === '리뷰작성' &&
             (reviewsUnwritten.length === 0 ? (
-              <div>작성가능한 구매후기가 없습니다.</div>
+              <div>작성가능한 구매후기가 없어요 !</div>
             ) : (
               reviewsUnwritten.map((review, i) => (
                 <React.Fragment key={i}>
