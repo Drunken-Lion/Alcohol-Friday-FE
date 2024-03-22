@@ -6,22 +6,22 @@ import serverInstance from 'app/_service/axios-server';
 
 const reissueToken = async (token: JWT) => {
   console.log('reissueToken refreshToken: ' + token.refreshToken);
-  const res = await serverInstance.post('/v1/auth/reissue-token', token.refreshToken, {
-    headers: { 'Content-Type': 'text/plain' },
-  });
 
-  if (res.status !== 200) {
-    alert('로그인 시간이 만료되었습니다. 다시 로그인해주세요.');
+  try {
+    const res = await serverInstance.post('/v1/auth/reissue-token', token.refreshToken, {
+      headers: { 'Content-Type': 'text/plain' },
+    });
+
+    return {
+      // ...token,
+      accessToken: res.data.accessToken,
+      accessTokenExp: res.data.accessTokenExp,
+      refreshToken: res.data.refreshToken,
+      member: token.member,
+    };
+  } catch (error) {
+    console.log(error);
   }
-
-  console.log(res.data);
-
-  return {
-    ...token,
-    accessToken: res.data.accessToken,
-    accessTokenExp: res.data.accessTokenExp,
-    refreshToken: res.data.refreshToken,
-  };
 };
 
 export const authOptions: NextAuthOptions = {
@@ -40,8 +40,8 @@ export const authOptions: NextAuthOptions = {
       // const url = `/v1/auth/login/${account?.provider}`;
       // const token = account?.access_token;
       const url = '/v1/auth/test';
-      const token = 'member1@af.shop';
-      console.log(token);
+      const token = 'member3@af.shop';
+      console.log('signIn token: ' + token);
       const res = await serverInstance.post(url, token, {
         headers: { 'Content-Type': 'text/plain' },
       });
@@ -70,6 +70,7 @@ export const authOptions: NextAuthOptions = {
       /**
        * 리프레시 토큰 이용해서 액세스 토큰 재발급하는 로직 작성하는 곳
        */
+      console.log(new Date(), new Date(token.accessTokenExp));
       if (Date.now() > token.accessTokenExp) {
         return reissueToken(token);
       }
@@ -77,11 +78,11 @@ export const authOptions: NextAuthOptions = {
       return token;
     },
     async session({ session, token }) {
-      // if (token.member) {
-      session.user = token.member;
-      session.accessToken = token.accessToken;
-      session.refreshToken = token.refreshToken;
-      // }
+      if (token.member) {
+        session.user = token.member;
+        session.accessToken = token.accessToken;
+        session.refreshToken = token.refreshToken;
+      }
 
       console.log('session: [' + JSON.stringify(session) + ']');
       return session;
