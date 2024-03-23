@@ -63,6 +63,18 @@ export default function Header() {
               <li className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10">
                 {session ? (
                   <>
+                    {session.user.role !== 'MEMBER' && (
+                      <Link
+                        href={{
+                          pathname: 'http://localhost:3001',
+                          query: { accessToken: session.accessToken },
+                        }}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        관리자페이지
+                      </Link>
+                    )}
                     <Link href="/mypage" className="mr-4">
                       마이페이지
                     </Link>
@@ -94,6 +106,16 @@ export default function Header() {
           <li>
             {session ? (
               <>
+                {session.user.role !== 'MEMBER' && (
+                  <Link
+                    href="http://localhost:3001"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className="mr-4"
+                  >
+                    관리자페이지
+                  </Link>
+                )}
                 <Link href="/mypage" className="mr-4">
                   마이페이지
                 </Link>

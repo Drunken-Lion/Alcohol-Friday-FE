@@ -5,6 +5,7 @@ export interface Member {
   nickname?: string;
   phone: number;
   provider: string;
+  role: String;
   createdAt: string;
   updatedAt: string;
   deletedAt?: string;
