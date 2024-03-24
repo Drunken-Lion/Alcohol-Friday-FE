@@ -1,78 +1,35 @@
 import serverInstance from './axios-server';
+import {
+  ProductListRequestData,
+  ProductItemResponseData,
+  ProductReviewResponseData,
+} from 'app/_types/store';
 
-type StoreListApi = {
-  size: number;
-  keyWord?: string;
-  keywordType?: string;
-};
-
-export async function getProductList(params: StoreListApi) {
+export async function getProductList(params: ProductListRequestData) {
   const res = await serverInstance.get(
-    `/v1/items?size=${params.size}&keyword=${params.keyWord}&keywordType=${params.keywordType}`,
+    `/v1/items?page=${params.page}&keyword=${params.keyWord}&categories=${params.categories}`,
   );
-  console.log(res);
+  if (res.status !== 200) {
+    throw new Error(`Failed to fetch product list: ${res.statusText}`);
+  }
+
   return res.data;
 }
 
-type ProductItem = {
-  id: number;
-  name: string;
-  price: number;
-  category: { firstName: string; lastName: string };
-  files: string[];
-  itemRating: { itemId: number; avgItemScore: number; totalReviewCount: number };
-};
-
-export async function getProductDetail(id: number): Promise<ProductItem> {
+export async function getProductDetail(id: number): Promise<ProductItemResponseData> {
   const res = await serverInstance.get(`/v1/items/${id}`);
-  console.log(res);
+  if (res.status !== 200) {
+    throw new Error(`Failed to fetch product detail: ${res.statusText}`);
+  }
+
   return res.data;
 }
 
-export async function getCartsList() {
-  const res = await serverInstance.get('/v1/carts');
-  console.log(res);
+export async function getProductReviews(id: number): Promise<ProductReviewResponseData> {
+  const res = await serverInstance.get(`/v1/items/${id}/reviews`);
+  if (res.status !== 200) {
+    throw new Error(`Failed to fetch product reviews: ${res.statusText}`);
+  }
+
   return res.data;
-}
-
-export async function addCartItem(itemId: number, quantity: number) {
-  try {
-    return await serverInstance.post('/v1/carts', {
-      cartRequestList: [
-        {
-          itemId: itemId,
-          quantity: quantity,
-        },
-      ],
-    });
-  } catch (error) {
-    console.error('error:', error);
-  }
-}
-
-export async function editQuantity(itemId: number, quantity: number) {
-  try {
-    return await serverInstance.put('/v1/carts', {
-      itemId: itemId,
-      quantity: quantity,
-    });
-  } catch (error) {
-    console.error('error:', error);
-  }
-}
-
-export async function deleteCartItem(itemId: number) {
-  try {
-    return await serverInstance.delete('/v1/carts', {
-      data: {
-        cartDeleteReqList: [
-          {
-            itemId: itemId,
-          },
-        ],
-      },
-    });
-  } catch (error) {
-    console.error('error:', error);
-  }
 }

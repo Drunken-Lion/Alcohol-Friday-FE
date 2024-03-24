@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Star from '/public/images/star.svg';
 import ReviewRating from '../mypage/ReviewRating';
 
@@ -22,6 +22,13 @@ export default function ProductItem({
   detailCheck,
 }: ProductItemProps) {
   const formattedPrice: string = price.toLocaleString('ko-KR');
+  const [clicked, setClicked] = useState<boolean[]>([]);
+
+  useEffect(() => {
+    const newClicked = Array(5).fill(false);
+    newClicked.fill(true, 0, reviewPoint);
+    setClicked(newClicked);
+  }, [reviewPoint]);
 
   return (
     <div className={`flex ${detailCheck ? 'flex-row' : 'flex-col'} w-full gap-5`}>
@@ -34,11 +41,7 @@ export default function ProductItem({
           <p className="text-stone-500 text-2xl font-bold pb-5">{name}</p>
           <p className="text-neutral-400 text-xl font-bold pb-2">{category}</p>
           <div className="flex pb-16 gap-1">
-            <ReviewRating
-              clicked={[true, true, true, false, false]}
-              onStarClick={undefined}
-              isShow={true}
-            />
+            <ReviewRating clicked={clicked} onStarClick={undefined} isShow={true} />
             <div className="text-neutral-400 text-xl font-normal">
               {reviewPoint}({reviewCount})
             </div>

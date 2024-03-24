@@ -1,39 +1,58 @@
 'use client';
 import { useQuery } from '@tanstack/react-query';
-import { getProductList, getProductDetail } from 'app/_service/store';
-import { useState } from 'react';
+import { getProductList, getProductDetail, getProductReviews } from 'app/_service/store';
 
 export default function useStore() {
-  const fetchProducts = () => {
-    return getProductList({ size: 12 });
+  const fetchProducts = (pageNum: number, keyWord: string, categories: string) => {
+    return getProductList({ keyWord: keyWord, categories: categories, page: pageNum });
   };
 
-  const [keyWord, setKeyWord] = useState<string>(''); // Define keyWord state
-
-  const fetchSearchProducts = () => {
-    return getProductList({ size: 12, keyWord });
-  };
-
-  const id: number = 2;
-
-  const fetchProductDetail = () => {
+  const fetchProductDetail = (id: number) => {
     return getProductDetail(id);
   };
 
-  const getStoreItem = useQuery({
-    queryKey: ['products'],
-    queryFn: fetchProducts,
-  });
+  const fetchProductReviews = (id: number) => {
+    return getProductReviews(id);
+  };
 
-  const getSearchList = useQuery({
-    queryKey: ['search', keyWord || ''],
-    queryFn: fetchSearchProducts,
-  });
+  const getStoreItem = (pageNum: number, keyWord = '', categories = '') => {
+    const {
+      isLoading,
+      isError,
+      data: items,
+    } = useQuery({
+      queryKey: ['products', pageNum - 1, keyWord, categories],
+      queryFn: () => fetchProducts(pageNum - 1, keyWord, categories),
+    });
 
-  const productDetail = useQuery({
-    queryKey: ['productDetail'],
-    queryFn: fetchProductDetail,
-  });
+    return { isLoading, isError, items };
+  };
 
-  return { getStoreItem, getSearchList, setKeyWord, productDetail };
+  const productDetail = (id: number) => {
+    const {
+      isLoading,
+      isError,
+      data: item,
+    } = useQuery({
+      queryKey: ['productDetail', id],
+      queryFn: () => fetchProductDetail(id),
+    });
+
+    return { isLoading, isError, item };
+  };
+
+  const productReviews = (id: number) => {
+    const {
+      isLoading,
+      isError,
+      data: items,
+    } = useQuery({
+      queryKey: ['productReviews', id],
+      queryFn: () => fetchProductReviews(id),
+    });
+
+    return { isLoading, isError, items };
+  };
+
+  return { getStoreItem, productDetail, productReviews };
 }
