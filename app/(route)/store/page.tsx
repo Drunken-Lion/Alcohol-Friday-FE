@@ -22,12 +22,14 @@ export default function Store() {
       <Search />
       <CategoryButton />
       <ProductList items={item} />
-      <Pagination
-        totalCount={items?.pageInfo.count}
-        pageRangeDisplayed={10}
-        page={pageNum}
-        setPage={setPageNum}
-      />
+      {items && (
+        <Pagination
+          totalCount={items?.pageInfo.count}
+          pageRangeDisplayed={10}
+          page={pageNum}
+          setPage={setPageNum}
+        />
+      )}
     </div>
   );
 }
