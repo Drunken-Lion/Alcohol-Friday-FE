@@ -1,10 +1,10 @@
 'use client';
-
-import Link from 'next/link';
 import React, { useState } from 'react';
-
-import Menu from '/public/images/menuButton.svg';
+import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
+import { IoPersonCircleSharp } from 'react-icons/io5';
+import CartStatus from './store/CartStatus';
+import Menu from '/public/images/menuButton.svg';
 
 export default function Header() {
   const [toggleOpen, setToggleOpen] = useState(false);
@@ -62,7 +62,6 @@ export default function Header() {
 
               <li className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10">
                 {session ? <Link href="/logout">로그아웃</Link> : <Link href="/login">로그인</Link>}
-
               </li>
             </ul>
           </div>
@@ -81,10 +80,15 @@ export default function Header() {
           <li>고객센터</li>
         </ul>
         <ul className="hidden lg:flex flex-row gap-x-5 text-sm mx-8 my-auto">
-          <li>
+          <li className="flex items-center gap-2">
             {session ? (
               <>
-                <Link href="/mypage">마이페이지</Link>
+                <Link href="/carts">
+                  <CartStatus />
+                </Link>
+                <Link href="/mypage">
+                  <IoPersonCircleSharp size={24} />
+                </Link>
                 {'       '}
                 <Link href="#" onClick={() => signOut({ callbackUrl: '/' })}>
                   로그아웃
@@ -94,7 +98,6 @@ export default function Header() {
               <Link href="/login">로그인</Link>
             )}
           </li>
-          {/* <li>회원가입</li> */}
         </ul>
       </nav>
     </React.Fragment>
