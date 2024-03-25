@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
@@ -7,8 +8,9 @@ import CartStatus from './store/CartStatus';
 import Menu from '/public/images/menuButton.svg';
 
 export default function Header() {
-  const [toggleOpen, setToggleOpen] = useState(false);
   const { data: session } = useSession();
+
+  const [toggleOpen, setToggleOpen] = useState(false);
 
   const handleMenuItemClick = () => {
     setToggleOpen(false);
@@ -89,7 +91,6 @@ export default function Header() {
                 <Link href="/mypage">
                   <IoPersonCircleSharp size={24} />
                 </Link>
-                {'       '}
                 <Link href="#" onClick={() => signOut({ callbackUrl: '/' })}>
                   로그아웃
                 </Link>

@@ -6,7 +6,7 @@ import { Pagination, Autoplay } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-const photos = [
+const photos: string[] = [
   '/images/alcohol1.png',
   '/images/alcohol2.png',
   '/images/alcohol3.png',

@@ -2,17 +2,16 @@
 
 import React, { useState } from 'react';
 import OrderItem from './OrderItem';
-import ReviewRating from './mypage/ReviewRating';
+import ReviewRating from './ReviewRating';
 import Textarea from './Textarea';
-import Close from '/public/images/close.svg';
 import Button from './Button';
-
-interface ModalProps {
-  onClose?: () => void;
-}
+import Close from '/public/images/close.svg';
+import { ModalProps } from 'app/_types/common';
 
 export default function Modal({ onClose }: ModalProps) {
   const [clicked, setClicked] = useState<boolean[]>([false, false, false, false, false]);
+  const [message, setMessage] = useState('');
+
   const handleStarClick = (index: number): void => {
     let clickStates: boolean[] = [...clicked];
     for (let i = 0; i < 5; i++) {
@@ -21,7 +20,6 @@ export default function Modal({ onClose }: ModalProps) {
     setClicked(clickStates);
   };
 
-  const [message, setMessage] = useState('');
   const handleTextChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMessage(e.target.value);
   };
@@ -37,11 +35,10 @@ export default function Modal({ onClose }: ModalProps) {
         </div>
         <div className="flex flex-col px-20 py-16">
           <OrderItem
+            itemId={110}
             image="/images/alcohol.png"
             title="어린꿀술"
-            storeName=""
-            subTitle="[500ml] 어린꿀술"
-            price=""
+            price={0}
             quantity={0}
             isValue={false}
           />
@@ -49,7 +46,7 @@ export default function Modal({ onClose }: ModalProps) {
             <p className="text-zinc-800 text-lg font-normal text-start">
               구매하신 상품은 만족하셨나요?
             </p>
-            <ReviewRating clicked={clicked} onStarClick={handleStarClick} />
+            <ReviewRating clicked={clicked} onStarClick={handleStarClick} isShow={false} />
           </div>
           <div className="flex flex-col gap-5 py-14">
             <p className="text-zinc-800 text-lg font-normal text-start">

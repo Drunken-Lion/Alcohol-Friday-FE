@@ -1,16 +1,12 @@
 'use client';
+
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import Modal from './Modal';
-
-interface PortalProps {
-  portalName: string;
-  className: string;
-}
+import { PortalProps } from 'app/_types/common';
 
 export default function Portal({ portalName, className }: PortalProps) {
   const [showModal, setShowModal] = useState(false);
-  console.log(showModal);
 
   return (
     <div>

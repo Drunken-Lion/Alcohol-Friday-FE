@@ -13,7 +13,6 @@ export default function Search() {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(inputSearchValue);
     setKeyword(inputSearchValue);
   };
 

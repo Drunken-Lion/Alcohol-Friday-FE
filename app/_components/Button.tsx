@@ -1,14 +1,5 @@
+import { ButtonProps } from 'app/_types/common';
 import React from 'react';
-import { act } from 'react-dom/test-utils';
-
-interface ButtonProps {
-  type?: 'submit' | undefined; // type이 undefined인 경우에는 'button'으로 지정
-  onClick?: () => void;
-  buttonName: string;
-  className: string;
-  disabled?: boolean;
-  active?: boolean;
-}
 
 export default function Button({
   type,
