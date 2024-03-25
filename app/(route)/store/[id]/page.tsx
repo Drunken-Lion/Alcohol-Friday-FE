@@ -1,31 +1,34 @@
 'use client';
+
+import React, { useEffect, useState } from 'react';
 import TabButton from 'app/_components/TabButton';
 import HandlingStore from 'app/_components/store/HandlingStore';
 import ProductItem from 'app/_components/store/ProductItem';
 import Quantity from 'app/_components/store/Quantity';
 import ReviewList from 'app/_components/store/ReviewList';
 import ViewDetail from 'app/_components/store/ViewDetail';
-import useStore from 'app/_hooks/useStore';
 import Loading from 'app/loading';
 import NotFound from 'app/not-found';
-import React from 'react';
+import useStore from 'app/_hooks/useStore';
+import { useProductId } from 'app/_stores/cart';
 
 export default function StoreDetail({ params: { id } }: { params: { id: number } }) {
-  console.log(id);
+  const { setProductId } = useProductId();
+  const { productDetail } = useStore();
+  const { isLoading, isError, item } = productDetail(id);
 
-  const {
-    productDetail: { isLoading, data: item, isError },
-  } = useStore();
+  const [selectedTab, setSelectedTab] = useState<string>('viewDetail');
+
+  useEffect(() => {
+    setProductId(id);
+  }, []);
 
   if (isLoading) {
     return <Loading />;
   }
-
   if (isError) {
     return <NotFound />;
   }
-
-  console.log(item);
 
   return (
     <div className="flex flex-col mt-20 mx-36 gap-20">
@@ -52,18 +55,20 @@ export default function StoreDetail({ params: { id } }: { params: { id: number }
       />
       <div className="flex">
         <TabButton
-          onClick={undefined}
+          onClick={() => setSelectedTab('viewDetail')}
           buttonName="상품 상세보기"
-          className="w-full text-center text-blue-900 text-xl font-bold border-b border-blue-900 cursor-grabbing"
+          isActive={selectedTab === 'viewDetail'}
+          className="w-full text-center text-xl cursor-grabbing"
         />
         <TabButton
-          onClick={undefined}
+          onClick={() => setSelectedTab('review')}
           buttonName="상품평"
-          className="w-full text-center text-gray-300 text-xl font-normal border-b cursor-grabbing"
+          isActive={selectedTab === 'review'}
+          className="w-full text-center text-xl cursor-grabbing"
         />
       </div>
-      <ViewDetail image="/images/detail.png" />
-      <ReviewList />
+      {selectedTab === 'viewDetail' && <ViewDetail image="/images/detail.png" />}
+      {selectedTab === 'review' && item && <ReviewList id={item.id} />}
     </div>
   );
 }

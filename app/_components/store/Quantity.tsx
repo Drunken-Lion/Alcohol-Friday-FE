@@ -1,19 +1,21 @@
 'use client';
+
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
 import Button from '../Button';
-import Link from 'next/link';
 import useCart from 'app/_hooks/useCart';
-
-interface QuantityProps {
-  quantity: number;
-  price: number;
-}
+import useOrder from 'app/_hooks/useOrder';
+import { useProductId } from 'app/_stores/cart';
+import { QuantityProps } from 'app/_types/store';
 
 export default function Quantity({ quantity, price }: QuantityProps) {
+  const router = useRouter();
+  const { productId } = useProductId();
   const { addCart } = useCart();
-  const itemId = 2;
+  const { addOrder } = useOrder();
+
   const [newQuantity, setNewQuantity] = useState<number>(quantity);
   const [newPrice, setNewPrice] = useState<number>(price);
 
@@ -24,16 +26,28 @@ export default function Quantity({ quantity, price }: QuantityProps) {
     setNewQuantity(newQuantity - 1);
     setNewPrice(newPrice - price);
   };
+
   const handlePlus = () => {
     setNewQuantity(newQuantity + 1);
     setNewPrice(price + newPrice);
   };
 
   const handleCartClick = () => {
-    const product = { itemId, quantity: newQuantity };
+    const product = { itemId: productId, quantity: newQuantity };
     addCart.mutate(product, {
       onSuccess: () => {
         window.alert('장바구니에 추가되었습니다.');
+        router.push('/carts');
+      },
+    });
+  };
+
+  const handleOrderClick = () => {
+    const products = [{ itemId: productId, quantity: newQuantity }];
+    console.log(products);
+    addOrder.mutate(products, {
+      onSuccess: () => {
+        router.push('/orders');
       },
     });
   };
@@ -64,17 +78,15 @@ export default function Quantity({ quantity, price }: QuantityProps) {
           {formattedPrice}원
         </div>
       </div>
-      <Link href={'/carts'}>
-        <Button
-          buttonName="장바구니"
-          className="w-full px-14 py-2.5 bg-gray-100 rounded justify-center items-center inline-flex text-center text-zinc-800 text-base font-normal my-2"
-          onClick={handleCartClick}
-        />
-      </Link>
+      <Button
+        buttonName="장바구니"
+        className="w-full px-14 py-2.5 bg-gray-100 rounded justify-center items-center inline-flex text-center text-zinc-800 text-base font-normal my-2"
+        onClick={handleCartClick}
+      />
       <Button
         buttonName="구매하기"
         className="w-full px-14 py-2.5 bg-slate-700 rounded justify-center items-center inline-flex text-center text-white text-base font-normal"
-        onClick={undefined}
+        onClick={handleOrderClick}
       />
     </div>
   );

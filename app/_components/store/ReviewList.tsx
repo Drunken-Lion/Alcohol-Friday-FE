@@ -1,16 +1,32 @@
 import React from 'react';
 import ReviewItem from './ReviewItem';
+import Loading from 'app/loading';
+import NotFound from 'app/not-found';
+import useStore from 'app/_hooks/useStore';
 
-export default function ReviewList() {
+export default function ReviewList({ id }: { id: number }) {
+  const { productReviews } = useStore();
+
+  const { isLoading, isError, items } = productReviews(id);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+  if (isError) {
+    return <NotFound />;
+  }
+
   return (
     <div>
-      <ReviewItem
-        nickname="nick"
-        reviewPoint="4.0"
-        orderDate="2024.03.16"
-        reviewContent="알콜향이 강하지 않고 소중한 사람들과 함께 하는 자리에서 마시기 딱 좋았어요 ㅎㅎ"
-        image="/images/alcohol.png"
-      />
+      {items?.data.map((item) => (
+        <ReviewItem
+          nickname={item.nickname}
+          reviewPoint={item.score}
+          orderDate={item.createdAt}
+          reviewContent={item.content}
+          image={item?.files?.file[0]}
+        />
+      ))}
     </div>
   );
 }

@@ -1,16 +1,7 @@
 import React, { useEffect, useState } from 'react';
+import ReviewRating from '../ReviewRating';
 import Star from '/public/images/star.svg';
-import ReviewRating from '../mypage/ReviewRating';
-
-interface ProductItemProps {
-  image: string;
-  name: string;
-  category: string;
-  price: number;
-  reviewPoint: number;
-  reviewCount: number;
-  detailCheck?: boolean;
-}
+import { ProductItemProps } from 'app/_types/store';
 
 export default function ProductItem({
   image,
@@ -21,8 +12,9 @@ export default function ProductItem({
   reviewCount,
   detailCheck,
 }: ProductItemProps) {
-  const formattedPrice: string = price.toLocaleString('ko-KR');
   const [clicked, setClicked] = useState<boolean[]>([]);
+
+  const formattedPrice: string = price.toLocaleString('ko-KR');
 
   useEffect(() => {
     const newClicked = Array(5).fill(false);
