@@ -24,7 +24,7 @@ export default function Navigation({ nickname, onClick, selectedTab }: Navigatio
       <Line />
       <div className="flex gap-16 pl-20 items-center">
         <div
-          className="flex flex-row gap-2.5 hover:cursor-pointer items-center"
+          className="flex flex-row gap-2.5 hover:cursor-grabbing items-center"
           onClick={() => onClick('order')}
         >
           <Order />
@@ -37,7 +37,7 @@ export default function Navigation({ nickname, onClick, selectedTab }: Navigatio
           </div>
         </div>
         <div
-          className="flex flex-row gap-2.5 hover:cursor-pointer items-center"
+          className="flex flex-row gap-2.5 hover:cursor-grabbing items-center"
           onClick={() => onClick('review')}
         >
           <Review />
@@ -50,7 +50,7 @@ export default function Navigation({ nickname, onClick, selectedTab }: Navigatio
           </div>
         </div>
         <div
-          className="flex flex-row gap-2.5 hover:cursor-pointer items-center"
+          className="flex flex-row gap-2.5 hover:cursor-grabbing items-center"
           onClick={() => onClick('member')}
         >
           <Member />
@@ -63,7 +63,7 @@ export default function Navigation({ nickname, onClick, selectedTab }: Navigatio
           </div>
         </div>
         <div
-          className="flex flex-row gap-2.5 hover:cursor-pointer items-center"
+          className="flex flex-row gap-2.5 hover:cursor-grabbing items-center"
           onClick={() => onClick('address')}
         >
           <Delivery />
@@ -76,7 +76,7 @@ export default function Navigation({ nickname, onClick, selectedTab }: Navigatio
           </div>
         </div>
         <div
-          className="flex flex-row gap-2.5 hover:cursor-pointer items-center"
+          className="flex flex-row gap-2.5 hover:cursor-grabbing items-center"
           onClick={() => onClick('question')}
         >
           <Inquiry />

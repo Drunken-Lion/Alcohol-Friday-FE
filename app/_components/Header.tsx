@@ -1,10 +1,10 @@
 'use client';
 
-import Link from 'next/link';
 import React, { useState } from 'react';
+import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
 
 import Menu from '/public/images/menuButton.svg';
-import { signOut, useSession } from 'next-auth/react';
 
 export default function Header() {
   const [toggleOpen, setToggleOpen] = useState(false);
@@ -61,8 +61,31 @@ export default function Header() {
               </li>
 
               <li className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10">
-                {session ? <Link href="/logout">로그아웃</Link> : <Link href="/login">로그인</Link>}
-
+                {session ? (
+                  <>
+                    {session.user.role !== 'MEMBER' && (
+                      <Link
+                        href={{
+                          pathname: 'http://localhost:3001/auth',
+                          query: { session: JSON.stringify(session) },
+                        }}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        className="mr-4"
+                      >
+                        관리자페이지
+                      </Link>
+                    )}
+                    <Link href="/mypage" className="mr-4">
+                      마이페이지
+                    </Link>
+                    <Link href="#" onClick={() => signOut({ callbackUrl: '/' })}>
+                      로그아웃
+                    </Link>
+                  </>
+                ) : (
+                  <Link href="/login">로그인</Link>
+                )}
               </li>
             </ul>
           </div>
@@ -84,7 +107,22 @@ export default function Header() {
           <li>
             {session ? (
               <>
-                <Link href="/mypage">마이페이지</Link>
+                {session.user.role !== 'MEMBER' && (
+                  <Link
+                    href={{
+                      pathname: 'http://localhost:3001/auth',
+                      query: { session: JSON.stringify(session) },
+                    }}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className="mr-4"
+                  >
+                    관리자페이지
+                  </Link>
+                )}
+                <Link href="/mypage" className="mr-4">
+                  마이페이지
+                </Link>
                 {'       '}
                 <Link href="#" onClick={() => signOut({ callbackUrl: '/' })}>
                   로그아웃
@@ -94,7 +132,6 @@ export default function Header() {
               <Link href="/login">로그인</Link>
             )}
           </li>
-          {/* <li>회원가입</li> */}
         </ul>
       </nav>
     </React.Fragment>

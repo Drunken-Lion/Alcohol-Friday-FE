@@ -1,6 +1,9 @@
 import type { Metadata } from 'next';
 import { getServerSession } from 'next-auth';
 
+import { authOptions } from './_utils/authOptions';
+import ReactQueryProvider from './_hooks/useReactQuery';
+
 import AuthSession from './AuthSession';
 import Header from './_components/Header';
 import Footer from './_components/Footer';

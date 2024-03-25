@@ -1,12 +1,14 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
-import Link from 'next/link';
-import { getProviders, signIn } from 'next-auth/react';
+import { getProviders, getSession, signIn } from 'next-auth/react';
+import { useRouter } from 'next/navigation';
+// import { useRouter } from 'next/router';
 
 export default function login() {
-  // const KAKAO_REDIRECT_URI = 'http://localhost:3000/api/auth/callback/kakao';
   const [providers, setProviders] = useState('null');
+
+  const [isLoading, setIsLoading] = useState(true);
+  const router = useRouter();
 
   useEffect(() => {
     (async () => {
@@ -15,14 +17,27 @@ export default function login() {
     })();
   }, []);
 
+  useEffect(() => {
+    getSession().then((session) => {
+      if (session) {
+        router.replace('/');
+      } else {
+        setIsLoading(false);
+      }
+    });
+  }, [router]);
+
   // 추가된 부분
   const handleKakao = async () => {
     const result = await signIn('kakao', {
       redirect: true,
-      // callbackUrl: '/api/auth/kakao',
       callbackUrl: '/',
     });
   };
+
+  if (isLoading) {
+    return <p>Loading ...</p>;
+  }
 
   return (
     <div className="m-auto flex flex-col items-center">
