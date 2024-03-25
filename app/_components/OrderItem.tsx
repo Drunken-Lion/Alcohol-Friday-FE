@@ -1,24 +1,13 @@
 'use client';
-import React, { useState } from 'react';
-import Button from './Button';
+
+import React, { useMemo } from 'react';
 import Portal from './Portal';
+// import Checkbox from './Checkbox';
 import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
 import { FaTrashAlt } from 'react-icons/fa';
-import Checkbox from './Checkbox';
 import useCart from 'app/_hooks/useCart';
-
-interface OrderItemProps {
-  title: string;
-  price: number;
-  quantity: number;
-  image?: string;
-  isValue?: Boolean;
-  onClick?: () => void;
-  cartCheck?: Boolean;
-  onSelect?: (checked: boolean) => void;
-  orderCheck?: Boolean;
-}
+import { OrderItemProps } from 'app/_types/cart';
 
 export default function OrderItem({
   title,
@@ -26,51 +15,46 @@ export default function OrderItem({
   quantity,
   image,
   isValue,
-  onClick,
   cartCheck,
-  onSelect,
   orderCheck,
+  itemId,
 }: OrderItemProps) {
-  const [checked, setChecked] = React.useState<boolean>(true);
-  const handleCheckboxChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(event.target.checked);
-    // 체크박스 선택 시 `onSelect` 함수 호출
-    if (onSelect) {
-      onSelect(event.target.checked);
-    }
-  };
+  // const [checked, setChecked] = React.useState<boolean>(true);
+  const { editCartQuantity, removeCartItem } = useCart();
 
   const formattedPrice: string = price.toLocaleString('ko-KR');
+  const cartItemTotalPrice: string = useMemo(
+    () => (price * quantity).toLocaleString('ko-KR'),
+    [price, quantity],
+  );
 
-  const cartItemTotalPrice: string = (price * quantity).toLocaleString('ko-KR');
-
-  const { editCartQuantity, removeCartItem } = useCart();
-  const itemId = 2;
   const handleMinusClick = () => {
     if (quantity < 2) return;
     quantity = quantity ? quantity - 1 : quantity;
     const product = { itemId, quantity };
     editCartQuantity.mutate(product);
   };
+
   const handlePlusClick = () => {
     quantity = quantity ? quantity + 1 : quantity;
     console.log(quantity);
     const product = { itemId, quantity };
     editCartQuantity.mutate(product);
   };
+
   const handleDeleteCartItem = () => {
     removeCartItem.mutate(itemId);
   };
 
   return (
     <div className="flex flex-row gap-5">
-      {cartCheck && (
+      {/* {cartCheck && (
         <Checkbox
           isChecked={checked}
           className="w-[25px] h-[25px] flex rounded-1 border-2 border-gray-300"
           onChange={handleCheckboxChange}
         />
-      )}
+      )} */}
       <div className="flex justify-center items-center w-28 h-40 bg-white rounded-lg border border-slate-700 border-opacity-20">
         <img src={image} />
       </div>
@@ -95,12 +79,6 @@ export default function OrderItem({
               <span>수량 {quantity}개</span>
             </div>
 
-            {/* <Button
-              className="flex justify-center py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900"
-              buttonName="리뷰쓰기"
-              type={undefined}
-              onClick={onClick}
-            ></Button> */}
             {orderCheck ? (
               <div className="text-zinc-800 text-base font-bold">3,000,000</div>
             ) : (

@@ -4,7 +4,7 @@ interface CheckboxProps {
   children?: ReactNode;
   isChecked?: boolean;
   className?: string;
-  onChange?: () => void;
+  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export default function Checkbox({ children, isChecked, className, onChange }: CheckboxProps) {

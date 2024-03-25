@@ -1,15 +1,31 @@
 import React from 'react';
+import { useRouter } from 'next/navigation';
 import Button from '../Button';
-
-interface CartBillProps {
-  productPrice: number;
-  deliveryFee: string;
-  totalPrice: number;
-}
+import useOrder from 'app/_hooks/useOrder';
+import useCart from 'app/_hooks/useCart';
+import { CartBillProps, CartItem } from 'app/_types/cart';
 
 export default function CartBill({ productPrice, deliveryFee, totalPrice }: CartBillProps) {
+  const router = useRouter();
+  const { addOrder } = useOrder();
+  const {
+    cartList: { data: items },
+  } = useCart();
+
   const formattedPrice: string = productPrice.toLocaleString('ko-KR');
   const formattedTotalPrice: string = totalPrice.toLocaleString('ko-KR');
+
+  const handleClickPurchase = () => {
+    const products = items?.cartDetailResponseList.map((item: CartItem) => ({
+      itemId: item.item.id,
+      quantity: item.quantity,
+    }));
+    addOrder.mutate(products, {
+      onSuccess: () => {
+        router.push('/orders');
+      },
+    });
+  };
 
   return (
     <div>
@@ -33,6 +49,7 @@ export default function CartBill({ productPrice, deliveryFee, totalPrice }: Cart
       </p>
       <Button
         buttonName="구매하기"
+        onClick={handleClickPurchase}
         className="w-full px-14 bg-slate-700 rounded-[5px] justify-center items-center text-center text-white text-base font-normal py-2.5 mt-12"
       />
     </div>

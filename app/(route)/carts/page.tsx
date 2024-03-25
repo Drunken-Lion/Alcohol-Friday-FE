@@ -1,25 +1,15 @@
 'use client';
-import Checkbox from 'app/_components/Checkbox';
+
+import React from 'react';
+// import Checkbox from 'app/_components/Checkbox';
 import OrderItem from 'app/_components/OrderItem';
 import CartBill from 'app/_components/store/CartBill';
-import useCart from 'app/_hooks/useCart';
 import Loading from 'app/loading';
 import NotFound from 'app/not-found';
-import React from 'react';
-
-type CartItem = {
-  item: {
-    name: string;
-    price: number;
-    file: string;
-  };
-  quantity: number;
-};
+import useCart from 'app/_hooks/useCart';
+import { CartItem } from 'app/_types/cart';
 
 export default function Carts() {
-  let selectedCartItems = 1;
-  const totalCartItems = 2;
-
   const {
     cartList: { isLoading, data: items, isError },
   } = useCart();
@@ -31,26 +21,32 @@ export default function Carts() {
     <NotFound />;
   }
 
-  console.log(items);
-
-  const productPrice = 6000000;
-  const totalPrice = productPrice + 2500;
+  let totalItemsPrice = 0;
+  if (items?.cartDetailResponseList) {
+    totalItemsPrice = items.cartDetailResponseList.reduce((acc: number, item: CartItem) => {
+      return acc + item.item.price * item.quantity;
+    }, 0);
+  }
+  const totalPrice = totalItemsPrice + 2500;
+  totalItemsPrice.toLocaleString('ko-KR');
+  totalPrice.toLocaleString('ko-KR');
 
   return (
     <div className="mx-36 mt-20">
-      <p className="text-center text-black text-[40px] font-normal">장바구니</p>
-      <div className="flex items-center mb-5 ml-5">
+      <p className="text-center text-black text-[40px] font-normal mb-5">장바구니</p>
+      {/* <div className="flex items-center mb-5 ml-5">
         <Checkbox className="w-[25px] h-[25px] flex rounded-1 border-2 border-gray-300 mr-2" />
         <span className="text-stone-500 text-base font-normal">모두선택</span>
         <span className="text-stone-500 text-base font-normal">
-          ({selectedCartItems}/{totalCartItems})
+          (2/2)
         </span>
-      </div>
+      </div> */}
       <div className="flex gap-16">
         <div className="w-full flex border rounded-[10px] border-gray-200 p-5">
-          <div className="flex flex-col gap-5">
+          <div className="w-full flex flex-col gap-10">
             {items?.cartDetailResponseList.map((item: CartItem) => (
               <OrderItem
+                itemId={item.item.id}
                 title={item.item.name}
                 price={item.item.price}
                 quantity={item.quantity}
@@ -60,7 +56,7 @@ export default function Carts() {
             ))}
           </div>
         </div>
-        <CartBill productPrice={productPrice} deliveryFee="2,500" totalPrice={totalPrice} />
+        <CartBill productPrice={totalItemsPrice} deliveryFee="2,500" totalPrice={totalPrice} />
       </div>
     </div>
   );

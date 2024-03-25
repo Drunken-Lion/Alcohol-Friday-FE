@@ -1,9 +1,10 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
-import { addCartItem, deleteCartItem, editQuantity, getCartsList } from 'app/_service/store';
+import { addCartItem, deleteCartItem, editQuantity, getCartsList } from 'app/_service/cart';
 import { CartRequestProp } from 'app/_types/cart';
 
 export default function useCart() {
   const queryClient = useQueryClient();
+
   const fetchCartList = () => {
     return getCartsList();
   };
