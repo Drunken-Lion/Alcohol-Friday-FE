@@ -1,7 +1,27 @@
+import { InputHTMLAttributes, ReactNode } from 'react';
+
+export interface OrderItemProps {
+  orderDetailId: number;
+  itemId: number;
+  title?: string;
+  price: number;
+  quantity: number;
+  score?: number;
+  image?: string;
+  isReview?: Boolean;
+  onClick?: () => void;
+  isReviewComplete?: Boolean;
+  reviewText?: string;
+  cartCheck?: Boolean;
+  orderCheck?: Boolean;
+}
+
 export interface TabButtonProps {
   buttonName: string;
   className?: string;
-  isActive: boolean;
+  isActive?: boolean;
+  selectedTab?: string;
+  isProductDetail: boolean;
   onClick?: () => void;
 }
 
@@ -13,7 +33,7 @@ export interface ReviewRatingProps {
 
 export interface ButtonProps {
   type?: 'submit' | undefined; // type이 undefined인 경우에는 'button'으로 지정
-  onClick?: () => void;
+  onClick?: (() => void) | ((e: React.MouseEvent) => void);
   buttonName: string;
   className: string;
   disabled?: boolean;
@@ -21,10 +41,26 @@ export interface ButtonProps {
 }
 
 export interface ModalProps {
+  orderDetailId: number;
   onClose?: () => void;
 }
 
 export interface PortalProps {
+  orderDetailId: number;
   portalName: string;
   className: string;
+}
+
+export interface CheckboxProps {
+  label: string;
+  children?: ReactNode;
+  dataName: string;
+  isChecked?: boolean;
+  className?: string;
+  value?: string;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label?: string;
 }

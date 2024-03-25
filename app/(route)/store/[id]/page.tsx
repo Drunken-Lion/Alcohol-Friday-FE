@@ -59,12 +59,14 @@ export default function StoreDetail({ params: { id } }: { params: { id: number }
           buttonName="상품 상세보기"
           isActive={selectedTab === 'viewDetail'}
           className="w-full text-center text-xl cursor-grabbing"
+          isProductDetail={true}
         />
         <TabButton
           onClick={() => setSelectedTab('review')}
           buttonName="상품평"
           isActive={selectedTab === 'review'}
           className="w-full text-center text-xl cursor-grabbing"
+          isProductDetail={true}
         />
       </div>
       {selectedTab === 'viewDetail' && <ViewDetail image="/images/detail.png" />}

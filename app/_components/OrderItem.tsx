@@ -1,26 +1,37 @@
-'use client';
-
 import React, { useMemo } from 'react';
 import Portal from './Portal';
+import { FaStar } from 'react-icons/fa';
 // import Checkbox from './Checkbox';
 import { FiMinus } from 'react-icons/fi';
 import { FiPlus } from 'react-icons/fi';
 import { FaTrashAlt } from 'react-icons/fa';
 import useCart from 'app/_hooks/useCart';
-import { OrderItemProps } from 'app/_types/cart';
+import { OrderItemProps } from 'app/_types/common';
 
 export default function OrderItem({
+  orderDetailId,
   title,
   price,
   quantity,
+  score,
   image,
-  isValue,
+  isReview,
+  isReviewComplete,
+  reviewText,
   cartCheck,
   orderCheck,
   itemId,
+  onClick,
 }: OrderItemProps) {
-  // const [checked, setChecked] = React.useState<boolean>(true);
   const { editCartQuantity, removeCartItem } = useCart();
+
+  let clicked: boolean[] = [];
+  if (isReviewComplete && score) {
+    for (let i = 0; i < score; i++) {
+      clicked[i] = true;
+    }
+  }
+  const starArray = [0, 1, 2, 3, 4];
 
   const formattedPrice: string = price.toLocaleString('ko-KR');
   const cartItemTotalPrice: string = useMemo(
@@ -59,32 +70,45 @@ export default function OrderItem({
         <img src={image} />
       </div>
       <div className={`flex flex-col ${cartCheck && 'w-full'}`}>
-        <div className="flex text-zinc-800 text-base font-bold pb-2 justify-between">
+        <div className="flex text-zinc-800 text-base font-bold">
           <span>{title}</span>
+          {isReviewComplete && (
+            <div className="flex flex-row pl-2">
+              {starArray.map((el) => {
+                const starStyles = clicked[el] ? 'text-blue-950' : 'text-slate-300';
+                return <FaStar fontSize={20} key={el} id={`${el}`} className={starStyles} />;
+              })}
+            </div>
+          )}
           {cartCheck && (
             <div onClick={handleDeleteCartItem}>
               <FaTrashAlt />
             </div>
           )}
         </div>
-        {isValue && (
+        <div className="text-stone-500 text-sm font-normal">
+          <span>{price}</span>
+          <span className="px-1">/</span>
+          <span>수량 {quantity}개</span>
+        </div>
+        {isReview && (
           <div>
-            <div
-              className={`text-stone-500 text-sm font-normal ${
-                orderCheck ? 'pb-[85px]' : 'pb-[70px]'
-              }`}
-            >
-              <span>{price}</span>
-              <span className="px-1">/</span>
-              <span>수량 {quantity}개</span>
-            </div>
-
-            {orderCheck ? (
-              <div className="text-zinc-800 text-base font-bold">3,000,000</div>
+            {isReviewComplete ? (
+              <div className="pt-3">
+                <span className="text-[#333333] text-base font-normal font-['Pretendard']">
+                  {reviewText}
+                </span>
+                <Portal
+                  orderDetailId={orderDetailId}
+                  portalName="리뷰수정"
+                  className="flex justify-center mt-10 py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900 cursor-grabbing"
+                />
+              </div>
             ) : (
               <Portal
+                orderDetailId={orderDetailId}
                 portalName="리뷰쓰기"
-                className="flex justify-center py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900 cursor-grabbing"
+                className="flex justify-center mt-[76px] py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900 cursor-grabbing"
               />
             )}
           </div>

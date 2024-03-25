@@ -63,7 +63,31 @@ export default function Header() {
               </li>
 
               <li className="flex pl-4 items-center h-20 bg-slate-700 border-b border-white border-opacity-10">
-                {session ? <Link href="/logout">로그아웃</Link> : <Link href="/login">로그인</Link>}
+                {session ? (
+                  <>
+                    {session.user.role !== 'MEMBER' && (
+                      <Link
+                        href={{
+                          pathname: 'http://localhost:3001/auth',
+                          query: { session: JSON.stringify(session) },
+                        }}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        className="mr-4"
+                      >
+                        관리자페이지
+                      </Link>
+                    )}
+                    <Link href="/mypage" className="mr-4">
+                      마이페이지
+                    </Link>
+                    <Link href="#" onClick={() => signOut({ callbackUrl: '/' })}>
+                      로그아웃
+                    </Link>
+                  </>
+                ) : (
+                  <Link href="/login">로그인</Link>
+                )}
               </li>
             </ul>
           </div>
@@ -88,6 +112,19 @@ export default function Header() {
                 <Link href="/carts">
                   <CartStatus />
                 </Link>
+                {session.user.role !== 'MEMBER' && (
+                  <Link
+                    href={{
+                      pathname: 'http://localhost:3001/auth',
+                      query: { session: JSON.stringify(session) },
+                    }}
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    className="mr-4"
+                  >
+                    관리자페이지
+                  </Link>
+                )}
                 <Link href="/mypage">
                   <IoPersonCircleSharp size={24} />
                 </Link>

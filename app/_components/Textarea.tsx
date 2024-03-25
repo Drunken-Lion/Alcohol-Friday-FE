@@ -5,7 +5,7 @@ interface TextareaProps {
   id: string;
   rows: number;
   onChange: (e: React.ChangeEvent<HTMLTextAreaElement>) => void;
-  value: string;
+  value?: string;
   placeholder: string;
   className: string;
 }
@@ -20,7 +20,7 @@ export default function Textarea({
   className,
 }: TextareaProps) {
   return (
-    <div className="flex">
+    <div>
       <label htmlFor={id}>{label}</label>
       <textarea
         id={id}
@@ -28,7 +28,7 @@ export default function Textarea({
         placeholder={placeholder}
         onChange={onChange}
         value={value}
-        className={`border border-slate-300 rounded-md w-full h-full ${className}`}
+        className={`border border-slate-300 rounded-md ${className}`}
       ></textarea>
     </div>
   );

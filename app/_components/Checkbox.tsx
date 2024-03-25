@@ -1,17 +1,31 @@
-import React, { ReactNode } from 'react';
+import { CheckboxProps } from 'app/_types/common';
+import React from 'react';
 
-interface CheckboxProps {
-  children?: ReactNode;
-  isChecked?: boolean;
-  className?: string;
-  onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-}
-
-export default function Checkbox({ children, isChecked, className, onChange }: CheckboxProps) {
+export default function Checkbox({
+  label,
+  children,
+  dataName,
+  isChecked,
+  className,
+  value,
+  onChange,
+}: CheckboxProps) {
   return (
-    <label>
-      <input type="checkbox" className={className} checked={isChecked} onChange={onChange} />
-      {children}
-    </label>
+    <div className="flex flex-row items-center">
+      <input
+        type="checkbox"
+        name={dataName}
+        className={className}
+        checked={isChecked}
+        onChange={onChange}
+        value={value}
+      />
+      {label !== '' && (
+        <label>
+          {children}
+          {label}
+        </label>
+      )}
+    </div>
   );
 }

@@ -3,31 +3,35 @@ import { Member } from './member';
 
 declare module 'next-auth' {
   /**
-   * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context
+   * Session
    */
   interface Session {
-    user: {
-      /** The user's postal address. */
-      id: number;
-      email: string;
-      name: string;
-      nickname?: string;
-      phone: number;
-      provider: string;
-      createdAt: string;
-      updatedAt: string;
-      deletedAt?: string;
-    };
+    user: Member;
+    accessToken?: string;
+    accessTokenExp: number;
+    refreshToken?: string;
+  }
+
+  /**
+   * Account
+   */
+  interface Account {
+    provider: string;
+    accessToken: string;
+    accessTokenExp: number;
+    refreshToken: string;
+    memberResponse: Member;
   }
 }
 
 declare module 'next-auth/jwt' {
+  /**
+   * JWT Token
+   */
   interface JWT {
-    token: {
-      accessToken: string;
-      accessTokenExp: number;
-      refreshToken: string;
-      member: Member;
-    };
+    accessToken?: string;
+    accessTokenExp: number;
+    refreshToken?: string;
+    member: Member;
   }
 }

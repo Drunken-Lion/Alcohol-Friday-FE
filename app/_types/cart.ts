@@ -13,18 +13,6 @@ export type CartItem = {
   quantity: number;
 };
 
-export interface OrderItemProps {
-  itemId: number;
-  title: string;
-  price: number;
-  quantity: number;
-  image?: string;
-  isValue?: Boolean;
-  onClick?: () => void;
-  cartCheck?: Boolean;
-  orderCheck?: Boolean;
-}
-
 export interface CartBillProps {
   productPrice: number;
   deliveryFee: string;
