@@ -1,4 +1,5 @@
 'use client';
+
 import React, { useEffect, useState } from 'react';
 
 import Button from './Button';
@@ -16,7 +17,7 @@ export default function Pagination({
   page,
   setPage,
 }: PaginationProps) {
-  const totalPages = Math.ceil(totalCount / 12);
+  const totalPages = Math.ceil(totalCount / pageRangeDisplayed);
   const [pageGroup, setPageGroup] = useState<number>(Math.ceil(page / pageRangeDisplayed));
   let firstNum = pageGroup * pageRangeDisplayed - (pageRangeDisplayed - 1);
   let lastNum = pageGroup * pageRangeDisplayed;
@@ -48,11 +49,7 @@ export default function Pagination({
       />
       <div className="flex gap-3">
         <Button
-          className={`w-[35px] h-[35px] ${
-            page === firstNum
-              ? 'bg-slate-700 border-slate-700 text-white'
-              : 'bg-white border-zinc-300 text-zinc-800'
-          } rounded-[36px] border   text-xl font-normal font-['ABeeZee']`}
+          className={`w-[35px] h-[35px] ${page === firstNum ? 'bg-slate-700 border-slate-700 text-white' : 'bg-white border-zinc-300 text-zinc-800'} rounded-[36px] border   text-xl font-normal font-['ABeeZee']`}
           buttonName={firstNum.toString()}
           onClick={() => {
             console.log('click 1');
@@ -69,11 +66,7 @@ export default function Pagination({
             return (
               <Button
                 key={i}
-                className={`w-[35px] h-[35px] ${
-                  page === firstNum + 1 + i
-                    ? 'bg-slate-700 border-slate-700 text-white'
-                    : 'bg-white border-zinc-300 text-zinc-800'
-                } rounded-[36px] border text-xl font-normal font-['ABeeZee']`}
+                className={`w-[35px] h-[35px] ${page === firstNum + 1 + i ? 'bg-slate-700 border-slate-700 text-white' : 'bg-white border-zinc-300 text-zinc-800'} rounded-[36px] border text-xl font-normal font-['ABeeZee']`}
                 buttonName={(firstNum + 1 + i).toString()}
                 onClick={() => {
                   setPage(() => {
