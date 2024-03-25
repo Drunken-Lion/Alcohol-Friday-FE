@@ -7,7 +7,7 @@ import Button from '../Button';
 import clientInstance from 'app/_service/axios-client';
 import { useQuery } from '@tanstack/react-query';
 
-export default function Member() {
+export default function Members() {
   const [member, setMember] = useState<Member>();
   const [phone, setPhone] = useState<string>('');
 

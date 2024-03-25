@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Address from 'app/_components/mypage/Address';
-import Member from 'app/_components/mypage/Member';
+import Members from 'app/_components/mypage/Member';
 import Navigation from 'app/_components/mypage/Navigation';
 import Order from 'app/_components/mypage/Order';
 import OrderStatus from 'app/_components/mypage/OrderStatus';
@@ -27,7 +27,7 @@ export default function mypage() {
       />
       {selectedTab === 'order' && <Order />}
       {selectedTab === 'review' && <ReviewWriteList />}
-      {selectedTab === 'member' && <Member />}
+      {selectedTab === 'member' && <Members />}
       {selectedTab === 'address' && <Address />}
       {selectedTab === 'question' && <Question />}
     </div>

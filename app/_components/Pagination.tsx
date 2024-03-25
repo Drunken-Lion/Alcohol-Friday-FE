@@ -50,7 +50,7 @@ export default function Pagination({
       <div className="flex gap-3">
         <Button
           className={`w-[35px] h-[35px] ${page === firstNum ? 'bg-slate-700 border-slate-700 text-white' : 'bg-white border-zinc-300 text-zinc-800'} rounded-[36px] border   text-xl font-normal font-['ABeeZee']`}
-          buttonName="1"
+          buttonName={firstNum.toString()}
           onClick={() => {
             console.log('click 1');
             setPage(firstNum);
@@ -65,6 +65,7 @@ export default function Pagination({
             }
             return (
               <Button
+                key={i}
                 className={`w-[35px] h-[35px] ${page === firstNum + 1 + i ? 'bg-slate-700 border-slate-700 text-white' : 'bg-white border-zinc-300 text-zinc-800'} rounded-[36px] border text-xl font-normal font-['ABeeZee']`}
                 buttonName={(firstNum + 1 + i).toString()}
                 onClick={() => {

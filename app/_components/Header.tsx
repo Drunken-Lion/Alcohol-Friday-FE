@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import Menu from '/public/images/menuButton.svg';
 import { signOut, useSession } from 'next-auth/react';
+import { Session } from 'next-auth';
 
 export default function Header() {
   const [toggleOpen, setToggleOpen] = useState(false);
@@ -13,6 +14,12 @@ export default function Header() {
   const handleMenuItemClick = () => {
     setToggleOpen(false);
   };
+
+  // const sendMessage = (session: Session) => {
+  //   const targetWindow = window.open('http://localhost:3001/auth');
+  //   if (targetWindow)
+  //     targetWindow.postMessage(session, { targetOrigin: 'http://localhost:3001/auth' });
+  // };
 
   return (
     <React.Fragment>
@@ -108,13 +115,19 @@ export default function Header() {
               <>
                 {session.user.role !== 'MEMBER' && (
                   <Link
-                    href="http://localhost:3001"
+                    href={{
+                      pathname: 'http://localhost:3001/auth',
+                      // query: { accessToken: session.accessToken, accessTokenExp: session.expires },
+                      query: { session: JSON.stringify(session) },
+                    }}
+                    // as="http://localhost:3001"
                     rel="noopener noreferrer"
                     target="_blank"
                     className="mr-4"
                   >
                     관리자페이지
                   </Link>
+                  // <button onClick={() => sendMessage(session)}>관리자페이지</button>
                 )}
                 <Link href="/mypage" className="mr-4">
                   마이페이지
