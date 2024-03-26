@@ -1,9 +1,17 @@
-export type CartRequestProp = {
+export type CartRequestData = {
   itemId: number;
   quantity: number;
 };
 
-export type CartItem = {
+export interface CartItemProps {
+  itemId: number;
+  title: string;
+  price: number;
+  quantity: number;
+  image: string;
+}
+
+export type CartItemData = {
   item: {
     name: string;
     price: number;
