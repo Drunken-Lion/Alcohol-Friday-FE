@@ -80,8 +80,9 @@ export default function Order() {
                         <OrderItem
                           orderDetailId={orderDetail.id}
                           title={orderDetail.name}
-                          price={orderDetail.totalPrice.toLocaleString('ko-KR')}
+                          price={orderDetail.totalPrice}
                           quantity={orderDetail.quantity}
+                          itemId={0}
                         />
                       </div>
                       <div className="flex justify-center w-0 h-40 border border-zinc-100" />
