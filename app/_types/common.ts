@@ -2,7 +2,6 @@ import { InputHTMLAttributes, ReactNode } from 'react';
 
 export interface OrderItemProps {
   orderDetailId: number;
-  itemId: number;
   title?: string;
   price: number;
   quantity: number;
@@ -12,8 +11,6 @@ export interface OrderItemProps {
   onClick?: () => void;
   isReviewComplete?: Boolean;
   reviewText?: string;
-  cartCheck?: Boolean;
-  orderCheck?: Boolean;
 }
 
 export interface TabButtonProps {
