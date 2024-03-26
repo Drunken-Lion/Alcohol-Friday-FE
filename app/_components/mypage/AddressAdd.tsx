@@ -153,14 +153,16 @@ export default function AddressAdd({ setPageType }: AddressAddProps) {
         onChange={handleTextareaOnchange}
         rows={4}
         placeholder=""
-        className="pl-3 pt-3"
+        className="w-full pl-3 pt-3 flex flex-col"
       />
-      <Checkbox
-        label="기본 배송지로 등록"
-        dataName="isPrimary"
-        className="w-5 h-5 rounded bg-white border-solid border-[#38465f]"
-        onChange={handleOnChange}
-      />
+      <div className="flex gap-1 items-center">
+        <Checkbox
+          dataName="isPrimary"
+          className="rounded bg-white border-solid border-[#38465f]"
+          onChange={handleOnChange}
+        />
+        <span>기본 배송지로 등록</span>
+      </div>
       <div className="flex justify-between">
         <Button
           buttonName="취소"

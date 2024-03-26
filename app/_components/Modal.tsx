@@ -1,25 +1,21 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
-
-import OrderItem from './mypage/OrderItem';
-import ReviewRating from './mypage/ReviewRating';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import clientInstance from 'app/_service/axios-client';
+import OrderItem from './OrderItem';
+import ReviewRating from './ReviewRating';
 import Textarea from './Textarea';
 import Button from './Button';
-
-import Close from '/public/images/close.svg';
-import Camera from '/public/images/solar_camera-linear.svg';
 import ImageThumbnail from './ImageThumbnail';
-import clientInstance from 'app/_service/axios-client';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-
-interface ModalProps {
-  orderDetailId: number;
-  onClose?: () => void;
-}
+import Camera from '/public/images/solar_camera-linear.svg';
+import Close from '/public/images/close.svg';
+import { ModalProps } from 'app/_types/common';
 
 export default function Modal({ orderDetailId, onClose }: ModalProps) {
   const [clicked, setClicked] = useState<boolean[]>([false, false, false, false, false]);
+  const [message, setMessage] = useState('');
+
   // const [score, setScore] = useState(0);
   const handleStarClick = (index: number): void => {
     let clickStates: boolean[] = [...clicked];
@@ -124,7 +120,7 @@ export default function Modal({ orderDetailId, onClose }: ModalProps) {
             <p className="text-zinc-800 text-lg font-normal text-start">
               구매하신 상품은 만족하셨나요?
             </p>
-            <ReviewRating clicked={clicked} onStarClick={handleStarClick} />
+            <ReviewRating clicked={clicked} onStarClick={handleStarClick} isShow={false} />
           </div>
           <div className="flex flex-col gap-5 py-9">
             <p className="text-zinc-800 text-lg font-normal text-start">

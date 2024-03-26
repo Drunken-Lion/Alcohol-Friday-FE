@@ -7,7 +7,7 @@ import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import Link from 'next/link';
 import { Orders } from 'app/_types/mypage/orders';
 import { dateFormat, getOrderStatus } from 'app/_utils/common';
-import OrderItem from './OrderItem';
+import OrderItem from '../OrderItem';
 import Button from '../Button';
 
 export default function Order() {

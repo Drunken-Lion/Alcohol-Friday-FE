@@ -8,7 +8,7 @@ import Button from '../Button';
 import Pagination from '../Pagination';
 import dayjs from 'dayjs';
 import clientInstance from 'app/_service/axios-client';
-import TabButton from './TabButton';
+import TabButton from '../TabButton';
 import QuestionWrite from './QuestionWrite';
 import { dateFormat } from 'app/_utils/common';
 
@@ -93,11 +93,13 @@ export default function Question() {
           onClick={() => handleClickTab('문의내역')}
           buttonName="문의내역"
           selectedTab={tabName}
+          isProductDetail={false}
         />
         <TabButton
           onClick={() => handleClickTab('문의하기')}
           buttonName="문의하기"
           selectedTab={tabName}
+          isProductDetail={false}
         />
       </div>
       {tabName === '문의하기' ? (

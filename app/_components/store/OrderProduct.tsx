@@ -15,7 +15,7 @@ export default function OrderProduct() {
             quantity={3}
             image="/images/alcohol.png"
             orderCheck={true}
-            isValue={true}
+            orderDetailId={0}
           />
         </div>
         <div className="flex justify-between border border-gray-300 rounded-[5px] px-7 py-4">

@@ -2,13 +2,11 @@
 
 import React, { useEffect, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
-
 import clientInstance from 'app/_service/axios-client';
-import OrderItem from './OrderItem';
-import TabButton from './TabButton';
+import TabButton from '../TabButton';
 import Pagination from '../Pagination';
+import OrderItem from '../OrderItem';
 import ReviewCompleteList from './ReviewCompleteList';
-
 import { Reviews, ReviewsUnwritten } from 'app/_types/mypage/review';
 
 export default function ReviewWriteList() {
@@ -72,11 +70,13 @@ export default function ReviewWriteList() {
             onClick={() => handleClickTab('리뷰작성')}
             buttonName="리뷰작성"
             selectedTab={tabName}
+            isProductDetail={false}
           />
           <TabButton
             onClick={() => handleClickTab('작성한 리뷰')}
             buttonName="작성한 리뷰"
             selectedTab={tabName}
+            isProductDetail={false}
           />
         </div>
         <div className="flex gap-6 flex-wrap ml-5">
@@ -89,9 +89,10 @@ export default function ReviewWriteList() {
                 <React.Fragment key={i}>
                   <div className="border rounded-md border-slate-700 border-opacity-20 p-7 w-[628px]">
                     <OrderItem
+                      itemId={0}
                       orderDetailId={review.orderDetailId}
                       title={review.itemName}
-                      price={review.itemPrice.toLocaleString('ko-KR')}
+                      price={review.itemPrice}
                       quantity={review.quantity}
                       image="../images/alcohol.png"
                       isReview={true}

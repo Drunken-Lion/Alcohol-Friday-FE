@@ -3,12 +3,14 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { signOut, useSession } from 'next-auth/react';
-
+import { IoPersonCircleSharp } from 'react-icons/io5';
+import CartStatus from './store/CartStatus';
 import Menu from '/public/images/menuButton.svg';
 
 export default function Header() {
-  const [toggleOpen, setToggleOpen] = useState(false);
   const { data: session } = useSession();
+
+  const [toggleOpen, setToggleOpen] = useState(false);
 
   const handleMenuItemClick = () => {
     setToggleOpen(false);
@@ -103,8 +105,8 @@ export default function Header() {
           </li>
           <li>고객센터</li>
         </ul>
-        <ul className="hidden lg:flex flex-row gap-x-5 text-sm mx-8 my-auto">
-          <li>
+        <ul className="hidden lg:flex flex-row gap-x-5 text-sm my-auto">
+          <li className="flex items-center gap-3">
             {session ? (
               <>
                 {session.user.role !== 'MEMBER' && (
@@ -115,15 +117,16 @@ export default function Header() {
                     }}
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="mr-4"
                   >
                     관리자페이지
                   </Link>
                 )}
-                <Link href="/mypage" className="mr-4">
-                  마이페이지
+                <Link href="/carts">
+                  <CartStatus />
                 </Link>
-                {'       '}
+                <Link href="/mypage">
+                  <IoPersonCircleSharp size={24} />
+                </Link>
                 <Link href="#" onClick={() => signOut({ callbackUrl: '/' })}>
                   로그아웃
                 </Link>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import OrderItem from './OrderItem';
+import OrderItem from '../OrderItem';
 
 import { Reviews } from 'app/_types/mypage/review';
 
