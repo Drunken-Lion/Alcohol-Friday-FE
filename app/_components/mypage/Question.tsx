@@ -93,11 +93,13 @@ export default function Question() {
           onClick={() => handleClickTab('문의내역')}
           buttonName="문의내역"
           selectedTab={tabName}
+          isProductDetail={false}
         />
         <TabButton
           onClick={() => handleClickTab('문의하기')}
           buttonName="문의하기"
           selectedTab={tabName}
+          isProductDetail={false}
         />
       </div>
       {tabName === '문의하기' ? (

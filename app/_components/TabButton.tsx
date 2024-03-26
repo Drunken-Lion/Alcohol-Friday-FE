@@ -9,7 +9,6 @@ export default function TabButton({
   isActive,
   isProductDetail,
 }: TabButtonProps) {
-  console.log();
   return (
     <div>
       {isProductDetail ? (

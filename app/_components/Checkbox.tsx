@@ -11,7 +11,7 @@ export default function Checkbox({
   onChange,
 }: CheckboxProps) {
   return (
-    <div className="flex flex-row items-center">
+    <div>
       <input
         type="checkbox"
         name={dataName}

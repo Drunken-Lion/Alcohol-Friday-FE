@@ -105,13 +105,10 @@ export default function Header() {
           </li>
           <li>고객센터</li>
         </ul>
-        <ul className="hidden lg:flex flex-row gap-x-5 text-sm mx-8 my-auto">
-          <li className="flex items-center gap-2">
+        <ul className="hidden lg:flex flex-row gap-x-5 text-sm my-auto">
+          <li className="flex items-center gap-3">
             {session ? (
               <>
-                <Link href="/carts">
-                  <CartStatus />
-                </Link>
                 {session.user.role !== 'MEMBER' && (
                   <Link
                     href={{
@@ -120,11 +117,13 @@ export default function Header() {
                     }}
                     rel="noopener noreferrer"
                     target="_blank"
-                    className="mr-4"
                   >
                     관리자페이지
                   </Link>
                 )}
+                <Link href="/carts">
+                  <CartStatus />
+                </Link>
                 <Link href="/mypage">
                   <IoPersonCircleSharp size={24} />
                 </Link>

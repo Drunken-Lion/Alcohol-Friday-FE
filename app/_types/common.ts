@@ -52,7 +52,7 @@ export interface PortalProps {
 }
 
 export interface CheckboxProps {
-  label: string;
+  label?: string;
   children?: ReactNode;
   dataName: string;
   isChecked?: boolean;

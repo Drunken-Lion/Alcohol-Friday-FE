@@ -32,7 +32,7 @@ export default function Carts() {
   totalPrice.toLocaleString('ko-KR');
 
   return (
-    <div className="mx-36 mt-20">
+    <div className="mx-36 my-20">
       <p className="text-center text-black text-[40px] font-normal mb-5">장바구니</p>
       {/* <div className="flex items-center mb-5 ml-5">
         <Checkbox className="w-[25px] h-[25px] flex rounded-1 border-2 border-gray-300 mr-2" />
@@ -42,19 +42,18 @@ export default function Carts() {
         </span>
       </div> */}
       <div className="flex gap-16">
-        <div className="w-full flex border rounded-[10px] border-gray-200 p-5">
-          <div className="w-full flex flex-col gap-10">
-            {items?.cartDetailResponseList.map((item: CartItem) => (
-              <OrderItem
-                itemId={item.item.id}
-                title={item.item.name}
-                price={item.item.price}
-                quantity={item.quantity}
-                image={item.item?.file}
-                cartCheck={true}
-              />
-            ))}
-          </div>
+        <div className="w-full flex flex-col gap-5">
+          {items?.cartDetailResponseList.map((item: CartItem) => (
+            <OrderItem
+              itemId={item.item.id}
+              title={item.item.name}
+              price={item.item.price}
+              quantity={item.quantity}
+              image={item.item?.file}
+              cartCheck={true}
+              orderDetailId={0}
+            />
+          ))}
         </div>
         <CartBill productPrice={totalItemsPrice} deliveryFee="2,500" totalPrice={totalPrice} />
       </div>

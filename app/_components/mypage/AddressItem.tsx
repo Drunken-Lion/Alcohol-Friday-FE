@@ -47,22 +47,22 @@ export default function AddressItem({ item }: AddressItemProps) {
   };
 
   return (
-    <div className="h-56 bg-white rounded border-solid border-[#D1D7DD] border p-6">
+    <div className="h-56 rounded border-solid border-[#D1D7DD] border p-6">
       <div className="flex items-center">
         <div className="text-[#333333] font-normal font-['ABeeZee'] text-xl">{item.recipient}</div>
         {item.isPrimary && (
-          <div className="w-20 h-6 bg-white rounded-2xl border border-solid border-[#354D8B] ml-2 text-[#354D8B] font-['ABeeZee'] font-normal text-sm break-words text-center">
+          <div className="flex justify-center items-center w-20 h-6 rounded-2xl border border-solid border-[#354D8B] ml-2 text-[#354D8B] font-['ABeeZee'] font-normal text-sm break-words text-center">
             기본배송지
           </div>
         )}
         <div className="flex-grow" />
         <div className="flex gap-2 pr-0">
           <Button
-            className="w-[50px] h-[30px] bg-white rounded-lg border border-stone-500 text-stone-500 text-base font-normal font-['ABeeZee']"
+            className="rounded-lg border border-stone-500 text-stone-500 text-base font-normal font-['ABeeZee'] py-1 px-2"
             buttonName="수정"
           />
           <Button
-            className="w-[50px] h-[30px] bg-white rounded-lg border border-stone-500 text-stone-500 text-base font-normal font-['ABeeZee']"
+            className="rounded-lg border border-stone-500 text-stone-500 text-base font-normal font-['ABeeZee'] py-1 px-2"
             buttonName="삭제"
             onClick={handleClickDelete}
           />
