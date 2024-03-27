@@ -79,6 +79,7 @@ export default function Order() {
                       <div className="w-full">
                         <OrderItem
                           orderDetailId={orderDetail.id}
+                          image={orderDetail.file?.file[0].path}
                           title={orderDetail.name}
                           price={orderDetail.totalPrice}
                           quantity={orderDetail.quantity}

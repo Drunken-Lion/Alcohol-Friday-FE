@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import clientInstance from 'app/_service/axios-client';
+import OrderItem from '../OrderItem';
 import TabButton from '../TabButton';
 import Pagination from '../Pagination';
 import OrderItem from '../OrderItem';
@@ -94,7 +95,8 @@ export default function ReviewWriteList() {
                       title={review.itemName}
                       price={review.itemPrice}
                       quantity={review.quantity}
-                      image="../images/alcohol.png"
+                      // image="../images/alcohol.png"
+                      image={review.file?.file[0].path}
                       isReview={true}
                       isReviewComplete={false}
                     />

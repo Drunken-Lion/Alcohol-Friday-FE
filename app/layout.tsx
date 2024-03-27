@@ -1,15 +1,17 @@
 import type { Metadata } from 'next';
-import { getServerSession } from 'next-auth';
+// import { getServerSession } from 'next-auth';
 
-import { authOptions } from './_utils/authOptions';
+// import { authOptions } from './_utils/authOptions';
 import ReactQueryProvider from './_hooks/useReactQuery';
 
 import AuthSession from './AuthSession';
 import Header from './_components/Header';
 import Footer from './_components/Footer';
 import './globals.css';
-import Head from 'next/head';
-import Script from 'next/script';
+
+// import Head from 'next/head';
+// import Script from 'next/script';
+
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -17,7 +19,8 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const session = await getServerSession();
+  // const session = await getServerSession();
+
   return (
     <html lang="en">
       <body>
