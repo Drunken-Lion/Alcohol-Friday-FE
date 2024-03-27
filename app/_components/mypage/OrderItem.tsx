@@ -1,12 +1,13 @@
 import React from 'react';
 import Portal from '../Portal';
 import { FaStar } from 'react-icons/fa';
+import Image from 'next/image';
 
 interface OrderItemProps {
   orderDetailId: number;
-  title?: string;
-  price?: string;
-  quantity?: number;
+  title: string;
+  price: string;
+  quantity: number;
   score?: number;
   image?: string;
   isReview?: Boolean;
@@ -36,8 +37,10 @@ export default function OrderItem({
   const starArray = [0, 1, 2, 3, 4];
   return (
     <div className="flex flex-row gap-5">
-      <div className="flex justify-center items-center w-28 h-40 bg-white rounded-lg border border-slate-700 border-opacity-20">
-        <img src={image} />
+      <div
+        className={`flex justify-center items-center bg-white rounded-lg border border-slate-700 border-opacity-20 py-4 ${!image && 'w-28 h-48'}`}
+      >
+        {image && <img src={image} alt="" className="w-28 h-40 object-contain" />}
       </div>
       <div className="flex flex-col">
         <div className="flex text-zinc-800 text-base font-bold">
@@ -65,15 +68,23 @@ export default function OrderItem({
                 </span>
                 <Portal
                   orderDetailId={orderDetailId}
+                  image={image}
+                  title={title}
+                  price={price}
+                  quantity={quantity}
                   portalName="리뷰수정"
-                  className="flex justify-center mt-10 py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900 cursor-grabbing"
+                  className="flex justify-center mt-20 py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900 cursor-grabbing"
                 />
               </div>
             ) : (
               <Portal
                 orderDetailId={orderDetailId}
+                image={image}
+                title={title}
+                price={price}
+                quantity={quantity}
                 portalName="리뷰쓰기"
-                className="flex justify-center mt-[76px] py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900 cursor-grabbing"
+                className="flex justify-center mt-28 py-2 text-blue-900 text-sm font-normal w-48 bg-white rounded-lg border border-blue-900 cursor-grabbing"
               />
             )}
           </div>

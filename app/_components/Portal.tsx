@@ -5,11 +5,23 @@ import Modal from './Modal';
 
 interface PortalProps {
   orderDetailId: number;
+  image?: string;
+  title: string;
+  price: string;
+  quantity: number;
   portalName: string;
   className: string;
 }
 
-export default function Portal({ orderDetailId, portalName, className }: PortalProps) {
+export default function Portal({
+  orderDetailId,
+  image,
+  title,
+  price,
+  quantity,
+  portalName,
+  className,
+}: PortalProps) {
   const [showModal, setShowModal] = useState(false);
 
   return (
@@ -21,7 +33,14 @@ export default function Portal({ orderDetailId, portalName, className }: PortalP
         createPortal(
           <>
             <div className="fixed left-0 top-0 z-20 h-full w-full bg-slate-600 bg-opacity-70" />
-            <Modal onClose={() => setShowModal(false)} orderDetailId={orderDetailId} />
+            <Modal
+              onClose={() => setShowModal(false)}
+              orderDetailId={orderDetailId}
+              image={image}
+              title={title}
+              price={price}
+              quantity={quantity}
+            />
           </>,
           document.body.appendChild(document.createElement('div')),
         )}

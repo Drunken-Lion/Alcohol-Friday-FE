@@ -32,11 +32,13 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         />
       </Head> */}
       <body>
-        <AuthSession>
-          <Header />
-          {children}
-          <Footer />
-        </AuthSession>
+        <ReactQueryProvider>
+          <AuthSession>
+            <Header />
+            {children}
+            <Footer />
+          </AuthSession>
+        </ReactQueryProvider>
       </body>
     </html>
   );

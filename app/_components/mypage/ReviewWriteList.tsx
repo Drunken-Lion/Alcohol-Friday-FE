@@ -93,7 +93,8 @@ export default function ReviewWriteList() {
                       title={review.itemName}
                       price={review.itemPrice.toLocaleString('ko-KR')}
                       quantity={review.quantity}
-                      image="../images/alcohol.png"
+                      // image="../images/alcohol.png"
+                      image={review.file?.file[0].path}
                       isReview={true}
                       isReviewComplete={false}
                     />

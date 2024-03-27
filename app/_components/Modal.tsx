@@ -15,10 +15,21 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 interface ModalProps {
   orderDetailId: number;
+  image?: string;
+  title: string;
+  price: string;
+  quantity: number;
   onClose?: () => void;
 }
 
-export default function Modal({ orderDetailId, onClose }: ModalProps) {
+export default function Modal({
+  orderDetailId,
+  image,
+  title,
+  price,
+  quantity,
+  onClose,
+}: ModalProps) {
   const [clicked, setClicked] = useState<boolean[]>([false, false, false, false, false]);
   // const [score, setScore] = useState(0);
   const handleStarClick = (index: number): void => {
@@ -114,10 +125,10 @@ export default function Modal({ orderDetailId, onClose }: ModalProps) {
         <div className="flex flex-col px-20 pt-16 pb-10">
           <OrderItem
             orderDetailId={orderDetailId}
-            image="/images/alcohol.png"
-            title="어린꿀술"
-            price=""
-            quantity={0}
+            image={image}
+            title={title}
+            price={price}
+            quantity={quantity}
             isReview={false}
           />
           <div className="flex flex-col gap-5 pt-10">
