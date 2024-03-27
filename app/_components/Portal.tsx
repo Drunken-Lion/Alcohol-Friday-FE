@@ -1,7 +1,10 @@
 'use client';
+
 import React, { useState } from 'react';
 import { createPortal } from 'react-dom';
 import Modal from './Modal';
+import { PortalProps } from 'app/_types/common';
+
 
 interface PortalProps {
   orderDetailId: number;

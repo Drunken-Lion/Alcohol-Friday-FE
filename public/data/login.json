@@ -1,0 +1,17 @@
+{
+  "memberResponse": {
+    "id": 52,
+    "email": "imsizz@kakao.com",
+    "name": "장다슬",
+    "nickname": "dtd",
+    "provider": "kakao",
+    "createdAt": "2024-02-13T10:37:58.046824",
+    "updatedAt": "2024-02-13T10:37:58.046824",
+    "deletedAt": null
+  },
+  "jwtResponse": {
+    "accessToken": "eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiTUVNQkVSIiwic3ViIjoiaW1zaXp6QGtha2FvLmNvbSIsImlhdCI6MTcwNzgyNzAwOSwiZXhwIjoxNzA3ODI4ODA5fQ.h1bfSQ6aYUMSJjxNIoAn_ef2GUO9dZm-t-G9fySz5tiOTxFN8W4YG5PnoQuUybDutPWGDJNRq7vsksOJxgIGwg",
+    "accessTokenExp": 1707828809417,
+    "refreshToken": "eyJhbGciOiJIUzUxMiJ9.eyJhdXRoIjoiTUVNQkVSIiwic3ViIjoiaW1zaXp6QGtha2FvLmNvbSIsImlhdCI6MTcwNzc4ODI3OCwiZXhwIjoxNzEwMzgwMjc4fQ.T5eKMA24ZYsJlHOlQ8DlDdOdTelcfvLdvZSIS0Rfy-AoWOn77L6Wzm-hKt1OZzGhcuOn3U198O15ndNkzV-F8A"
+  }
+}

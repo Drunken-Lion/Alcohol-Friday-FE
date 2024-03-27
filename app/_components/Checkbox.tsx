@@ -1,14 +1,5 @@
-import React, { ReactNode } from 'react';
-
-interface CheckboxProps {
-  label: string;
-  children?: ReactNode;
-  dataName: string;
-  isChecked?: boolean;
-  className?: string;
-  value?: string;
-  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
+import { CheckboxProps } from 'app/_types/common';
+import React from 'react';
 
 export default function Checkbox({
   label,
@@ -20,7 +11,7 @@ export default function Checkbox({
   onChange,
 }: CheckboxProps) {
   return (
-    <div className="flex flex-row items-center">
+    <div>
       <input
         type="checkbox"
         name={dataName}
