@@ -2,8 +2,7 @@ import { InputHTMLAttributes, ReactNode } from 'react';
 
 export interface OrderItemProps {
   orderDetailId: number;
-  itemId: number;
-  title?: string;
+  title: string;
   price: number;
   quantity: number;
   score?: number;
@@ -12,8 +11,6 @@ export interface OrderItemProps {
   onClick?: () => void;
   isReviewComplete?: Boolean;
   reviewText?: string;
-  cartCheck?: Boolean;
-  orderCheck?: Boolean;
 }
 
 export interface TabButtonProps {
@@ -42,11 +39,19 @@ export interface ButtonProps {
 
 export interface ModalProps {
   orderDetailId: number;
+  image?: string;
+  title: string;
+  price: number;
+  quantity: number;
   onClose?: () => void;
 }
 
 export interface PortalProps {
   orderDetailId: number;
+  image?: string;
+  title: string;
+  price: number;
+  quantity: number;
   portalName: string;
   className: string;
 }

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import Portal from './Portal';
 import { FaStar } from 'react-icons/fa';
@@ -17,7 +16,6 @@ export default function OrderItem({
   reviewText,
   onClick,
 }: OrderItemProps) {
-
   let clicked: boolean[] = [];
   if (isReviewComplete && score) {
     for (let i = 0; i < score; i++) {
@@ -25,8 +23,6 @@ export default function OrderItem({
     }
   }
   const starArray = [0, 1, 2, 3, 4];
-  
-   const formattedPrice: string = price.toLocaleString('ko-KR');
 
   return (
     <div className="flex flex-row gap-5">
@@ -48,7 +44,7 @@ export default function OrderItem({
           )}
         </div>
         <div className="text-stone-500 text-sm font-normal">
-          <span>{formattedPrice}</span>
+          <span>{price.toLocaleString('ko-KR')}</span>
           <span className="px-1">/</span>
           <span>수량 {quantity}개</span>
         </div>

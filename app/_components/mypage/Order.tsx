@@ -66,7 +66,7 @@ export default function Order() {
                 </span>
                 <span className="text-zinc-800 text-base font-normal font-['Pretendard']">|</span>
                 <span className="text-zinc-800 text-base font-normal font-['Pretendard']">
-                  {`0${item.phone.toString()}`.replace(/(\d{2,3})(\d{3,4})(\d{4})/, '$1-$2-$3')}
+                  {`0${item.phone}`}
                 </span>
               </div>
               <div className="text-[#B55849] text-base font-['Pretendard'] mt-5">
@@ -83,7 +83,6 @@ export default function Order() {
                           title={orderDetail.name}
                           price={orderDetail.totalPrice}
                           quantity={orderDetail.quantity}
-                          itemId={0}
                         />
                       </div>
                       <div className="flex justify-center w-0 h-40 border border-zinc-100" />
@@ -117,11 +116,7 @@ export default function Order() {
                         받는분
                       </span>
                       <span className="text-zinc-800 text-base font-normal font-['Pretendard']">
-                        {item.recipient} /{' '}
-                        {`0${item.phone.toString()}`.replace(
-                          /(\d{2,3})(\d{3,4})(\d{4})/,
-                          '$1-$2-$3',
-                        )}
+                        {item.recipient} / {`0${item.phone}`}
                       </span>
                     </div>
                     <div className="flex flex-row gap-6">
