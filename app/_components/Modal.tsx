@@ -2,7 +2,7 @@
 
 import React, { useRef, useState } from 'react';
 
-import OrderItem from './mypage/OrderItem';
+import OrderItem from './OrderItem';
 import ReviewRating from './mypage/ReviewRating';
 import Textarea from './Textarea';
 import Button from './Button';

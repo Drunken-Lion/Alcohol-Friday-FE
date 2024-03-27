@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 
 import clientInstance from 'app/_service/axios-client';
-import OrderItem from './OrderItem';
+import OrderItem from '../OrderItem';
 import TabButton from './TabButton';
 import Pagination from '../Pagination';
 import ReviewCompleteList from './ReviewCompleteList';
