@@ -1,7 +1,6 @@
 import React from 'react';
-import Portal from './Portal';
 import { FaStar } from 'react-icons/fa';
-import Image from 'next/image';
+import Portal from './Portal';
 import { OrderItemProps } from 'app/_types/common';
 
 export default function OrderItem({

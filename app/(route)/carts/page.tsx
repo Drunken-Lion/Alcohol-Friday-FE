@@ -2,12 +2,12 @@
 
 import React from 'react';
 // import Checkbox from 'app/_components/Checkbox';
-import OrderItem from 'app/_components/OrderItem';
 import CartBill from 'app/_components/store/CartBill';
+import CartItem from 'app/_components/store/CartItem';
 import Loading from 'app/loading';
 import NotFound from 'app/not-found';
 import useCart from 'app/_hooks/useCart';
-import { CartItem } from 'app/_types/cart';
+import { CartItemData } from 'app/_types/cart';
 
 export default function Carts() {
   const {
@@ -23,7 +23,7 @@ export default function Carts() {
 
   let totalItemsPrice = 0;
   if (items?.cartDetailResponseList) {
-    totalItemsPrice = items.cartDetailResponseList.reduce((acc: number, item: CartItem) => {
+    totalItemsPrice = items.cartDetailResponseList.reduce((acc: number, item: CartItemData) => {
       return acc + item.item.price * item.quantity;
     }, 0);
   }
@@ -42,16 +42,15 @@ export default function Carts() {
         </span>
       </div> */}
       <div className="flex gap-16">
-        <div className="w-full flex flex-col gap-5">
-          {items?.cartDetailResponseList.map((item: CartItem) => (
-            <OrderItem
+        <div className="w-full flex flex-col gap-7 border border-gray-300 rounded-[10px] p-7">
+          {items?.cartDetailResponseList.map((item: CartItemData, idx: number) => (
+            <CartItem
+              key={idx}
               itemId={item.item.id}
               title={item.item.name}
               price={item.item.price}
               quantity={item.quantity}
               image={item.item?.file}
-              cartCheck={true}
-              orderDetailId={0}
             />
           ))}
         </div>

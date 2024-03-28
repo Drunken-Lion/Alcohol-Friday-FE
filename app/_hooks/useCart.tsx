@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { addCartItem, deleteCartItem, editQuantity, getCartsList } from 'app/_service/cart';
-import { CartRequestProp } from 'app/_types/cart';
+import { CartRequestData } from 'app/_types/cart';
 
 export default function useCart() {
   const queryClient = useQueryClient();
@@ -15,7 +15,7 @@ export default function useCart() {
   });
 
   const addCart = useMutation({
-    mutationFn: (cartRequestProp: CartRequestProp) => {
+    mutationFn: (cartRequestProp: CartRequestData) => {
       const { itemId, quantity } = cartRequestProp;
       return addCartItem(itemId, quantity);
     },
@@ -25,7 +25,7 @@ export default function useCart() {
   });
 
   const editCartQuantity = useMutation({
-    mutationFn: (cartRequestProp: CartRequestProp) => {
+    mutationFn: (cartRequestProp: CartRequestData) => {
       const { itemId, quantity } = cartRequestProp;
       return editQuantity(itemId, quantity);
     },

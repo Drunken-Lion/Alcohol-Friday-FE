@@ -140,7 +140,7 @@ export default function Modal({
               rows={2}
               onChange={handleTextChange}
               value={content}
-              className="p-3"
+              className="p-3 w-full"
               placeholder="구매하신 상품에 대한 자세한 후기를 작성해주세요!"
             />
           </div>
