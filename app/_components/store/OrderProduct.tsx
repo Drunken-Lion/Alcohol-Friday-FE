@@ -9,12 +9,11 @@ export default function OrderProduct() {
         <div className="border border-gray-300 rounded-[5px] p-8">
           <p className="text-red-500 text-base font-normal">주문상품정보 1건</p>
           <OrderItem
-            itemId={1}
             title="어린꿀술"
             price={1000000}
             quantity={3}
             image="/images/alcohol.png"
-            orderCheck={true}
+            // orderCheck={true}
             orderDetailId={0}
           />
         </div>
