@@ -22,9 +22,7 @@ export default function Modal({
   onClose,
 }: ModalProps) {
   const [clicked, setClicked] = useState<boolean[]>([false, false, false, false, false]);
-  const [message, setMessage] = useState('');
 
-  // const [score, setScore] = useState(0);
   const handleStarClick = (index: number): void => {
     let clickStates: boolean[] = [...clicked];
     for (let i = 0; i < 5; i++) {
@@ -42,6 +40,9 @@ export default function Modal({
   const imageRef = useRef<HTMLInputElement | null>(null);
 
   const handleClickImageUpload = (): void => {
+    if (files.length === 3) {
+      return alert('사진은 최대 3장까지 첨부 가능해요 !');
+    }
     imageRef.current?.click();
   };
 
@@ -73,7 +74,7 @@ export default function Modal({
       content: content,
     };
 
-    if (files) {
+    if (files.length > 0) {
       Array.from(files).forEach((el) => {
         formData.append('files', el);
       });

@@ -18,13 +18,13 @@ type File = {
   path: string;
 };
 
-export type Reviews = {
+export interface Reviews {
   id: number;
   score: number;
   content: string;
   orderDetail: OrderDetail;
   files?: FileInfo;
-};
+}
 
 type OrderDetail = {
   orderDetailId: number;

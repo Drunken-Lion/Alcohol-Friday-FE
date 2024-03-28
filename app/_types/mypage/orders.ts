@@ -1,6 +1,6 @@
 import { FileInfo } from './review';
 
-export type Orders = {
+export interface Orders {
   id: number;
   orderNo: string;
   orderStatus: string;
@@ -15,12 +15,12 @@ export type Orders = {
   description: string;
   createdAt: string;
   orderDetails: OrderDetail[];
-};
+}
 
-type OrderDetail = {
+export interface OrderDetail {
   id: number;
   name: string;
   quantity: number;
   totalPrice: number;
   file?: FileInfo;
-};
+}
