@@ -23,7 +23,7 @@ export default function RestaurantDetail({ params: { id } }: { params: { id: num
   }
 
   return (
-    <div className="mx-36 my-20">
+    <div className="mx-36 my-20 h-full">
       <RestaurantInfo restaurantId={id} />
       <RestaurantItemList items={item} />
       <Pagination

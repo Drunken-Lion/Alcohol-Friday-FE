@@ -4,12 +4,9 @@ import React, { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
 import { Coordinates, MapProps, NaverMap } from 'app/_types/map';
 import { INITIAL_ZOOM } from 'app/_hooks/useMap';
-import { useWindowSize } from 'app/_hooks/useWindowSize';
 
 export default function Map({ mapId = 'map', initialZoom = INITIAL_ZOOM, onLoad }: MapProps) {
   const mapRef = useRef<NaverMap | null>(null);
-
-  const { width, height } = useWindowSize();
 
   const [myLocation, setMyLocation] = useState<{ latitude: number; longitude: number }>({
     latitude: 37.569343,
@@ -28,12 +25,11 @@ export default function Map({ mapId = 'map', initialZoom = INITIAL_ZOOM, onLoad 
           position: window.naver.maps.Position.BOTTOM_LEFT,
         },
       };
-
       //새로운 네이버 맵 인스턴스 생성
       const map = new window.naver.maps.Map(mapId, mapOptions);
       mapRef.current = map;
-
       let mapBounds = map.getBounds();
+      console.log(mapBounds);
 
       const neLatitude = mapBounds.getMax().y;
       const neLongitude = mapBounds.getMax().x;
@@ -43,7 +39,6 @@ export default function Map({ mapId = 'map', initialZoom = INITIAL_ZOOM, onLoad 
       if (onLoad) {
         onLoad(map, neLatitude, neLongitude, swLatitude, swLongitude);
       }
-
       const rect = new naver.maps.Rectangle({
         strokeOpacity: 0,
         strokeWeight: 0,
@@ -106,7 +101,7 @@ export default function Map({ mapId = 'map', initialZoom = INITIAL_ZOOM, onLoad 
         src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}`}
         onReady={initializeMap}
       />
-      <div id={mapId} style={{ width, height }} />
+      <div id={mapId} style={{ width: '100%', height: '100%' }} />
     </>
   );
 }

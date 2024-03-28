@@ -44,7 +44,7 @@ export default function restaurant() {
     // setSwLon(126.99868700755292);
   };
   return (
-    <div style={{ width: '1000px', height: '1000px' }}>
+    <div style={{ width: '100%', height: '100%' }}>
       <Map onLoad={onLoadMap} />
       <Markers items={items} />
     </div>
