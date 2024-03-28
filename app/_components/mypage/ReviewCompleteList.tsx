@@ -21,7 +21,7 @@ export default function ReviewCompleteList({ reviews }: Props) {
             price={review.orderDetail.itemPrice}
             quantity={review.orderDetail.quantity}
             score={review.score}
-            image={review.orderDetail.file?.file[0].path}
+            image={review.files?.file[0].path}
             isReview={true}
             isReviewComplete={true}
             reviewText={review.content}

@@ -36,10 +36,11 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async signIn({ account }) {
-      // const url = `/v1/auth/login/${account?.provider}`;
-      // const token = account?.access_token;
-      const url = '/v1/auth/test';
-      const token = 'member1@af.shop';
+      const url = `/v1/auth/login/${account?.provider}`;
+      const token = account?.access_token;
+      // const url = '/v1/auth/test';
+      // const token = 'owner10@af.shop';
+      // const token = 'member3@af.shop';
       console.log('signIn token: ' + token);
       const res = await serverInstance.post(url, token, {
         headers: { 'Content-Type': 'text/plain' },
