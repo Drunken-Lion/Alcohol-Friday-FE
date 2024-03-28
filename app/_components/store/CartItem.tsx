@@ -42,8 +42,8 @@ export default function CartItem({ itemId, title, price, quantity, image }: Cart
         onChange={handleCheckboxChange}
       />
     )} */}
-      <div className="flex justify-center items-center w-28 h-40 bg-white rounded-lg border border-slate-700 border-opacity-20">
-        <img src={image} />
+      <div className="flex justify-center items-center w-28 h-40 bg-white rounded-lg border border-slate-700 border-opacity-20 py-3 px-5">
+        <img src={image} className="w-[81.03px] h-[129.31px] object-contain" />
       </div>
       <div className="flex flex-col w-full">
         <div className="flex text-zinc-800 text-base font-bold pb-2 justify-between">

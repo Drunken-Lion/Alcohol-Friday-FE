@@ -2,12 +2,15 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import Button from '../Button';
 import Pagination from '../Pagination';
-import Portal from '../Portal';
 import Loading from 'app/loading';
 import NotFound from 'app/not-found';
-import Location from '/public/images/location_button.svg';
+import MapModal from './MapModal';
+import Map from '../Map';
 import useRestaurant from 'app/_hooks/useRestaurant';
 import { RestaurantCheckItemData, RestaurantCheckRequestData } from 'app/_types/restaurant';
+import useMap from 'app/_hooks/useMap';
+import { NaverMap } from 'app/_types/map';
+import Location from '/public/images/location_button.svg';
 
 export default function HandlingStore({
   userLocationLatitude,
@@ -29,11 +32,22 @@ export default function HandlingStore({
     <NotFound />;
   }
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // console.log(items);
 
-  const toggleModal = () => {
-    setIsModalOpen((prev) => !prev);
-  };
+  // const [isModalOpen, setIsModalOpen] = useState(false);
+
+  // const toggleModal = () => {
+  //   setIsModalOpen((prev) => !prev);
+  // };
+
+  // const { initializeModalMap } = useMap();
+
+  // const onLoadMap = (map: NaverMap) => {
+  //   console.log('dddddsss');
+  //   initializeModalMap(map);
+  // };
+
+  const [currentLocation, setCurrentLocation] = useState<string>('서울 종로구 낙원동 211');
 
   return (
     <div>
@@ -46,9 +60,13 @@ export default function HandlingStore({
               <th>주류명</th>
               <th>가게명</th>
               <th>가게주소</th>
-              {/* <th className="flex justify-center items-center gap-1 h-[60px]">
-                {items.data.address} <Location onClick={toggleModal} className="cursor-grabbing" />
-              </th> */}
+              <th className="flex justify-center items-center gap-1 h-[60px]">
+                {currentLocation}
+                <Location onClick={undefined} className="cursor-grabbing w-[26px] h-[26px]" />
+                {/* <MapModal isOpen={isModalOpen} onClose={toggleModal}>
+                  <Map onLoad={onLoadMap} />
+                </MapModal> */}
+              </th>
             </tr>
           </thead>
           <tbody>
