@@ -10,7 +10,7 @@ export default function TabButton({
   isProductDetail,
 }: TabButtonProps) {
   return (
-    <div>
+    <>
       {isProductDetail ? (
         <div
           className={`${className}
@@ -33,6 +33,6 @@ export default function TabButton({
           {buttonName}
         </div>
       )}
-    </div>
+    </>
   );
 }

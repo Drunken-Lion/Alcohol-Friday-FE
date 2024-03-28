@@ -31,7 +31,7 @@ export default function StoreDetail({ params: { id } }: { params: { id: number }
   }
 
   return (
-    <div className="flex flex-col mt-20 mx-36 gap-20 h-full">
+    <div className="flex flex-col mt-20 mx-36 gap-20">
       <div className="flex gap-20 justify-center">
         {item && (
           <ProductItem

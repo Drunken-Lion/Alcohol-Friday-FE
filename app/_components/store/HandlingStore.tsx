@@ -40,7 +40,7 @@ export default function HandlingStore({
       <p className="text-zinc-800 text-xl font-bold mb-5">내 주변 취급 점포</p>
       <div className="border border-slate-700 border-opacity-20 text-center rounded-[10px]">
         <table className="table-fixed w-full ">
-          <thead>
+          <thead className="h-[50px]">
             <tr className="border-b border-slate-300 border-opacity-20">
               <th>거리</th>
               <th>주류명</th>

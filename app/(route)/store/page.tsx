@@ -18,7 +18,7 @@ export default function Store() {
   const item = items?.data;
 
   return (
-    <div className="mx-36 mt-16 h-full">
+    <div className="mx-36 mt-16">
       <Search />
       <CategoryButton />
       <ProductList items={item} />

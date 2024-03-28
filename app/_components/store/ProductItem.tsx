@@ -24,14 +24,18 @@ export default function ProductItem({
 
   return (
     <div className={`flex ${detailCheck ? 'flex-row' : 'flex-col'} w-full gap-5`}>
-      <div className="flex justify-center rounded-lg border border-slate-700 border-opacity-20 py-4">
+      <div
+        className={`flex justify-center rounded-lg border border-slate-700 border-opacity-20 ${
+          detailCheck ? 'px-36 items-center' : 'py-4'
+        }`}
+      >
         <img src={image} className="object-contain w-[195px] h-[311px]" />
       </div>
       {detailCheck ? (
         <div>
           <p className="text-stone-500 text-2xl font-bold pb-5">{name}</p>
           <p className="text-neutral-400 text-xl font-bold pb-2">{category}</p>
-          <div className="flex pb-16 gap-1">
+          <div className="flex pb-28 gap-1">
             <ReviewRating clicked={clicked} onStarClick={undefined} isShow={true} />
             <div className="text-neutral-400 text-xl font-normal">
               {reviewPoint}({reviewCount})
