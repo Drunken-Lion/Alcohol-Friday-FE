@@ -4,7 +4,7 @@ import React from 'react';
 
 export default function Orders() {
   return (
-    <div className="mx-36 mt-16 h-full">
+    <div className="mx-36 mt-16">
       <p className="text-center text-black text-[40px] font-normal mb-20">주문/결제</p>
       <OrderProduct />
       <div className="flex justify-center my-10">
