@@ -3,9 +3,9 @@
 import React, { useEffect, useState } from 'react';
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import clientInstance from 'app/_service/axios-client';
+import OrderItem from '../OrderItem';
 import TabButton from '../TabButton';
 import Pagination from '../Pagination';
-import OrderItem from '../OrderItem';
 import ReviewCompleteList from './ReviewCompleteList';
 import { Reviews, ReviewsUnwritten } from 'app/_types/mypage/review';
 
@@ -89,12 +89,11 @@ export default function ReviewWriteList() {
                 <React.Fragment key={i}>
                   <div className="border rounded-md border-slate-700 border-opacity-20 p-7 w-[628px]">
                     <OrderItem
-                      itemId={0}
                       orderDetailId={review.orderDetailId}
                       title={review.itemName}
                       price={review.itemPrice}
                       quantity={review.quantity}
-                      image="../images/alcohol.png"
+                      image={review.file?.file[0].path}
                       isReview={true}
                       isReviewComplete={false}
                     />

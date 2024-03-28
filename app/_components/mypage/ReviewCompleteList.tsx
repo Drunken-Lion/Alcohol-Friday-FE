@@ -18,10 +18,10 @@ export default function ReviewCompleteList({ reviews }: Props) {
           <OrderItem
             orderDetailId={review.orderDetail.orderDetailId}
             title={review.orderDetail.itemName}
-            price={review.orderDetail.itemPrice.toLocaleString('ko-KR')}
+            price={review.orderDetail.itemPrice}
             quantity={review.orderDetail.quantity}
             score={review.score}
-            image="../images/alcohol.png"
+            image={review.orderDetail.file?.file[0].path}
             isReview={true}
             isReviewComplete={true}
             reviewText={review.content}

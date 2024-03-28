@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useRef, useState } from 'react';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import clientInstance from 'app/_service/axios-client';
 import OrderItem from './OrderItem';
@@ -12,7 +13,14 @@ import Camera from '/public/images/solar_camera-linear.svg';
 import Close from '/public/images/close.svg';
 import { ModalProps } from 'app/_types/common';
 
-export default function Modal({ orderDetailId, onClose }: ModalProps) {
+export default function Modal({
+  orderDetailId,
+  image,
+  title,
+  price,
+  quantity,
+  onClose,
+}: ModalProps) {
   const [clicked, setClicked] = useState<boolean[]>([false, false, false, false, false]);
   const [message, setMessage] = useState('');
 
@@ -110,10 +118,10 @@ export default function Modal({ orderDetailId, onClose }: ModalProps) {
         <div className="flex flex-col px-20 pt-16 pb-10">
           <OrderItem
             orderDetailId={orderDetailId}
-            image="/images/alcohol.png"
-            title="어린꿀술"
-            price=""
-            quantity={0}
+            image={image}
+            title={title}
+            price={price}
+            quantity={quantity}
             isReview={false}
           />
           <div className="flex flex-col gap-5 pt-10">
