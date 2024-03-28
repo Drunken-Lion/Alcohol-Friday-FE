@@ -1,13 +1,13 @@
-import { Coordinates, NaverMap } from 'app/_types/map';
 import { useCallback } from 'react';
 import useSWR, { mutate } from 'swr';
+import { Coordinates, NaverMap } from 'app/_types/map';
 
-export const INITIAL_CENTER: Coordinates = [37.5525107, 126.8475549];
+export const INITIAL_CENTER: Coordinates = [37.569343, 126.9914879818916];
 export const INITIAL_ZOOM = 16;
 
 export const MAP_KEY = '/map';
 
-const useMap = () => {
+export default function useMap() {
   const { data: map } = useSWR(MAP_KEY);
 
   const initializeMap = useCallback((map: NaverMap) => {
@@ -31,5 +31,4 @@ const useMap = () => {
     resetMapOptions,
     getMapOptions,
   };
-};
-export default useMap;
+}
