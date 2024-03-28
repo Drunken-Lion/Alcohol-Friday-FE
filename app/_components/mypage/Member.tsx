@@ -7,6 +7,10 @@ import Button from '../Button';
 import clientInstance from 'app/_service/axios-client';
 import { useQuery } from '@tanstack/react-query';
 
+declare const window: typeof globalThis & {
+  IMP: any;
+};
+
 export default function Members() {
   const [member, setMember] = useState<Member>();
   const [phone, setPhone] = useState<string>('');
@@ -36,14 +40,63 @@ export default function Members() {
   }, [queryData]);
 
   useEffect(() => {
+    phoneNumberConverter(member!!);
+  }, [member]);
+
+  const phoneNumberConverter = (member: Member) => {
     if (member?.phone !== undefined) {
       const phone = `0${member?.phone.toString()}` || '';
       setPhone(phone?.replace(/(\d{2,3})(\d{3,4})(\d{4})/, '$1-$2-$3'));
     }
-  }, [member]);
+  };
 
   const handleOnChange = () => {
     console.log('onChange !!');
+  };
+
+  const handleCertification = () => {
+    if (!window.IMP) return;
+
+    const { IMP } = window;
+    IMP.init(process.env.NEXT_PUBLIC_IMP_CODE);
+
+    const data = {
+      pg: process.env.NEXT_PUBLIC_IMP_PG,
+      popup: true,
+    };
+
+    IMP.certification(data, callback);
+  };
+
+  const callback = async (rsp: any) => {
+    if (rsp.success) {
+      // 인증 성공 시 로직
+      alert(await certifyFetch(rsp.imp_uid));
+      const resMember = await getMember();
+      phoneNumberConverter(resMember);
+    } else {
+      // 인증 실패 시 로직 (인증 도중에 창을 닫거나 했을때, 인증 절차가 완료되지 않았을 때)
+      console.log('성인 인증 실패');
+      alert('성인 인증을 다시 시도해 주세요.');
+    }
+  };
+
+  const certifyFetch = async (imp_uid: string) => {
+    console.log('성인인증');
+    try {
+      await clientInstance.post('/v1/auth/certifications', imp_uid, {
+        headers: { 'Content-Type': 'text/plain' },
+      });
+
+      return '성인 인증이 완료되었습니다.';
+    } catch (err: any) {
+      // 인증은 성공했으나 서버에서 에러가 날 경우 (이미 성인인증을 했거나, 미성년자일때)
+      console.log('성인 인증 서버 에러');
+      console.log(err.response.data);
+
+      // 서버에서 설정한 에러 메세지
+      return err.response.data.message;
+    }
   };
 
   return (
@@ -84,6 +137,7 @@ export default function Members() {
       <Button
         buttonName="성인인증"
         className="w-full h-10 bg-white rounded-lg border border-[#354D8B] border-solid font-['Pretendard'] font-normal text-sm text-[#354D8B]"
+        onClick={handleCertification}
       />
       <div className="flex flex-row items-end justify-between">
         <div>
