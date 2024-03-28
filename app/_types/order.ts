@@ -1,4 +1,4 @@
-export type OrderRequestProp = [
+export type OrderRequestData = [
   {
     itemId: number;
     quantity: number;
