@@ -10,12 +10,12 @@ export const useSearchStore = create<KeywordInfo>((set) => ({
   setKeyword: (newKeyword: string) => set((state) => ({ ...state, keyword: newKeyword })),
 }));
 
-interface CategoriesIngo {
+interface CategoriesInfo {
   category: string;
   setCategory: (state: string) => void;
 }
 
-export const useCategoriesStore = create<CategoriesIngo>((set) => ({
+export const useCategoriesStore = create<CategoriesInfo>((set) => ({
   category: '',
   setCategory: (newCategory: string) => set((state) => ({ ...state, category: newCategory })),
 }));

@@ -35,7 +35,7 @@ export default function StoreDetail({ params: { id } }: { params: { id: number }
       <div className="flex gap-20 justify-center">
         {item && (
           <ProductItem
-            image="/images/alcohol.png"
+            image={item.files.file[0].path}
             name={item.name}
             category={item.category.lastName}
             price={item.price}
@@ -47,11 +47,9 @@ export default function StoreDetail({ params: { id } }: { params: { id: number }
         {item && <Quantity quantity={1} price={item.price} />}
       </div>
       <HandlingStore
-        currentAddress="서울 강서구 화곡동 993-15"
-        distance="0.3km"
-        liquor="매화수"
-        store="춘천옥닭갈비"
-        sotreAddress="서울 강서구 화곡동 993-15"
+        userLocationLatitude={37.569343}
+        userLocationLongitude={126.9914879818916}
+        itemId={5}
       />
       <div className="flex">
         <TabButton

@@ -1,60 +1,97 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Script from 'next/script';
-import { Coordinates, NaverMap } from 'app/_types/map';
-import { INITIAL_CENTER, INITIAL_ZOOM } from 'app/_hooks/useMap';
+import { Coordinates, MapProps, NaverMap } from 'app/_types/map';
+import { INITIAL_ZOOM } from 'app/_hooks/useMap';
+import { useWindowSize } from 'app/_hooks/useWindowSize';
 
-type Props = {
-  mapId?: string;
-  initialCenter?: Coordinates;
-  initialZoom?: number;
-  onLoad?: (map: NaverMap) => void;
-};
-
-export default function Map({
-  mapId = 'map',
-  initialCenter = INITIAL_CENTER,
-  initialZoom = INITIAL_ZOOM,
-  onLoad,
-}: Props) {
+export default function Map({ mapId = 'map', initialZoom = INITIAL_ZOOM, onLoad }: MapProps) {
   const mapRef = useRef<NaverMap | null>(null);
+
+  const { width, height } = useWindowSize();
+
+  const [myLocation, setMyLocation] = useState<{ latitude: number; longitude: number }>({
+    latitude: 37.569343,
+    longitude: 126.9914879818916,
+  });
 
   const initializeMap = () => {
     if (window.naver && window.naver.maps) {
-      console.log('네이버 지도 API 로딩 완료');
-      console.log(initialCenter);
-      console.log(initialZoom);
-
       const mapOptions = {
-        center: new window.naver.maps.LatLng(...initialCenter),
+        center: new window.naver.maps.LatLng(myLocation.latitude, myLocation.longitude),
         zoom: initialZoom,
         minZoom: 9,
         scaleControl: false,
         mapDataControl: false,
         logoControlOptions: {
-          position: naver.maps.Position.BOTTOM_LEFT,
+          position: window.naver.maps.Position.BOTTOM_LEFT,
         },
       };
+
       //새로운 네이버 맵 인스턴스 생성
       const map = new window.naver.maps.Map(mapId, mapOptions);
       mapRef.current = map;
+
       let mapBounds = map.getBounds();
-      console.log(mapBounds);
+
+      const neLatitude = mapBounds.getMax().y;
+      const neLongitude = mapBounds.getMax().x;
+      const swLatitude = mapBounds.getMin().y;
+      const swLongitude = mapBounds.getMin().x;
 
       if (onLoad) {
-        onLoad(map);
+        onLoad(map, neLatitude, neLongitude, swLatitude, swLongitude);
       }
-    } else {
-      console.error('네이버 지도 API가 로드되지 않았습니다.');
+
+      const rect = new naver.maps.Rectangle({
+        strokeOpacity: 0,
+        strokeWeight: 0,
+        fillOpacity: 0.2,
+        bounds: map.getBounds(),
+        map: map,
+      });
+
+      naver.maps.Event.addListener(map, 'bounds_changed', function (bounds) {
+        window.setTimeout(function () {
+          rect.setBounds(bounds);
+
+          const neLatitude = bounds.getMax().y;
+          const neLongitude = bounds.getMax().x;
+          const swLatitude = bounds.getMin().y;
+          const swLongitude = bounds.getMin().x;
+
+          if (onLoad) {
+            onLoad(map, neLatitude, neLongitude, swLatitude, swLongitude);
+          } else {
+            console.error('네이버 지도 API가 로드되지 않았습니다.');
+          }
+        }, 500);
+      });
     }
   };
 
-  // useEffect(() => {
-  //   initializeMap();
-  // }, []);
+  useEffect(() => {
+    const success = (position: any) => {
+      setMyLocation({
+        // latitude: position.coords.latitude,
+        // longitude: position.coords.longitude,
+        latitude: 37.569343,
+        longitude: 126.9914879818916,
+      });
+    };
 
-  // 맵이 unmount되었을 때 맵 인스턴스 destory하기
+    const error = () => {
+      setMyLocation({ latitude: 37.569343, longitude: 126.9914879818916 });
+    };
+
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(success, error);
+    }
+
+    initializeMap();
+  }, []);
+
   useEffect(() => {
     return () => {
       mapRef.current?.destroy();
@@ -69,7 +106,7 @@ export default function Map({
         src={`https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${process.env.NEXT_PUBLIC_NAVER_CLIENT_ID}`}
         onReady={initializeMap}
       />
-      <div id={mapId} style={{ width: '500px', height: '500px' }} />
+      <div id={mapId} style={{ width, height }} />
     </>
   );
 }

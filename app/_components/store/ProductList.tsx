@@ -9,7 +9,7 @@ export default function ProductList({ items }: { items: ProductItemResponseData[
       {items?.map((item: ProductItemResponseData) => (
         <Link key={item.id} href={`/store/${item.id}`}>
           <ProductItem
-            image={item.files[0]}
+            image={item.files?.file[0]?.path}
             name={item.name}
             category={item.category.lastName}
             price={item.price}
