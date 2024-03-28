@@ -9,6 +9,7 @@ import useCart from 'app/_hooks/useCart';
 import useOrder from 'app/_hooks/useOrder';
 import { useProductId } from 'app/_stores/cart';
 import { QuantityProps } from 'app/_types/store';
+import { OrderRequestData } from 'app/_types/order';
 
 export default function Quantity({ quantity, price }: QuantityProps) {
   const router = useRouter();
@@ -43,7 +44,7 @@ export default function Quantity({ quantity, price }: QuantityProps) {
   };
 
   const handleOrderClick = () => {
-    const products = [{ itemId: productId, quantity: newQuantity }];
+    const products: OrderRequestData = [{ itemId: productId, quantity: newQuantity }];
     console.log(products);
     addOrder.mutate(products, {
       onSuccess: () => {

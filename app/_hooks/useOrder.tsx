@@ -6,7 +6,7 @@ export default function useOrder() {
   const queryClient = useQueryClient();
 
   const addOrder = useMutation({
-    mutationFn: (orderRequestProp: OrderRequestData[]) => {
+    mutationFn: (orderRequestProp: OrderRequestData) => {
       //   const { itemId, quantity } = orderRequestProp;
       return orderReception(orderRequestProp);
     },
