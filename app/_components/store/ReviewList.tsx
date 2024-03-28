@@ -24,7 +24,7 @@ export default function ReviewList({ id }: { id: number }) {
           reviewPoint={item.score}
           orderDate={item.createdAt}
           reviewContent={item.content}
-          image={item?.files?.file[0]}
+          image={item?.files?.file[0].path}
         />
       ))}
     </div>

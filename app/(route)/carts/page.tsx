@@ -30,9 +30,10 @@ export default function Carts() {
   const totalPrice = totalItemsPrice + 2500;
   totalItemsPrice.toLocaleString('ko-KR');
   totalPrice.toLocaleString('ko-KR');
+  console.log(items);
 
   return (
-    <div className="mx-36 my-20 h-full">
+    <div className="mx-36 my-20">
       <p className="text-center text-black text-[40px] font-normal mb-5">장바구니</p>
       {/* <div className="flex items-center mb-5 ml-5">
         <Checkbox className="w-[25px] h-[25px] flex rounded-1 border-2 border-gray-300 mr-2" />
@@ -50,7 +51,7 @@ export default function Carts() {
               title={item.item.name}
               price={item.item.price}
               quantity={item.quantity}
-              image={item.item?.file}
+              image={item.item?.files?.file[0].path}
             />
           ))}
         </div>

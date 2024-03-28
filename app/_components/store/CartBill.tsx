@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import Button from '../Button';
 import useOrder from 'app/_hooks/useOrder';
 import useCart from 'app/_hooks/useCart';
-import { CartBillProps, CartItem } from 'app/_types/cart';
+import { CartBillProps, CartItemData } from 'app/_types/cart';
 
 export default function CartBill({ productPrice, deliveryFee, totalPrice }: CartBillProps) {
   const router = useRouter();
@@ -16,7 +16,7 @@ export default function CartBill({ productPrice, deliveryFee, totalPrice }: Cart
   const formattedTotalPrice: string = totalPrice.toLocaleString('ko-KR');
 
   const handleClickPurchase = () => {
-    const products = items?.cartDetailResponseList.map((item: CartItem) => ({
+    const products = items?.cartDetailResponseList.map((item: CartItemData) => ({
       itemId: item.item.id,
       quantity: item.quantity,
     }));

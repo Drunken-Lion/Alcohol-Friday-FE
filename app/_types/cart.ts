@@ -15,7 +15,7 @@ export type CartItemData = {
   item: {
     name: string;
     price: number;
-    file: string;
+    files: { file: [{ path: string }] };
     id: number;
   };
   quantity: number;

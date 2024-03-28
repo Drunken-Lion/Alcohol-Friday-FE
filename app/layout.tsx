@@ -1,12 +1,8 @@
 import type { Metadata } from 'next';
-// import { getServerSession } from 'next-auth';
-
-// import { authOptions } from './_utils/authOptions';
-import ReactQueryProvider from './_hooks/useReactQuery';
-
 import AuthSession from './AuthSession';
 import Header from './_components/Header';
 import Footer from './_components/Footer';
+import ReactQueryProvider from './_hooks/useReactQuery';
 import './globals.css';
 
 export const metadata: Metadata = {
@@ -15,8 +11,6 @@ export const metadata: Metadata = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  // const session = await getServerSession();
-
   return (
     <html lang="en">
       <body>
