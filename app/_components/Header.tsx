@@ -24,7 +24,7 @@ export default function Header() {
         } text-white border-b border-white border-opacity-10`}
       >
         <Link href="/" className="py-3 lg:py-2">
-          <img src="./images/logo.png" />
+          <img src="/images/logo.png" className="w-28" />
         </Link>
         {/* 메뉴 아이콘 (모바일 화면) */}
         <div className="lg:hidden my-auto">

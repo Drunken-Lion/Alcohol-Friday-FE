@@ -1904,10 +1904,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/query-core@npm:5.28.8":
-  version: 5.28.8
-  resolution: "@tanstack/query-core@npm:5.28.8"
-  checksum: 45766560dcf891984457512c135645b47a744d4e38c79d47336ef8a902c6867b6d9b8e6343bf0c1fb77a61d568250fd404aa92bd38943df7bbaf615c65ce7c3d
+"@tanstack/query-core@npm:5.28.9":
+  version: 5.28.9
+  resolution: "@tanstack/query-core@npm:5.28.9"
+  checksum: f2ee703fad514cf8d87636e79315f969a087f2300be8130c0ab6ee6549154fdda1bec267b1091abb77671e9bb9ef027a6d84cc65913d5fd59386247983db19ac
   languageName: node
   linkType: hard
 
@@ -1930,14 +1930,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@tanstack/react-query@npm:^5.25.0":
-  version: 5.28.8
-  resolution: "@tanstack/react-query@npm:5.28.8"
+"@tanstack/react-query@npm:^5.28.9":
+  version: 5.28.9
+  resolution: "@tanstack/react-query@npm:5.28.9"
   dependencies:
-    "@tanstack/query-core": 5.28.8
+    "@tanstack/query-core": 5.28.9
   peerDependencies:
     react: ^18.0.0
-  checksum: 99ee42ffd14ea9372cc9a4f9f703d778cebd551ab2ba2e8f42827e5a398f45183f60e80bf7e90ed370d779e440f22d8686ec9e03fecc6e394e8f352b7df4a040
+  checksum: 2bcaec4c7d1c46a15996bf3295cc65cd56510e2dc31820e714a4f03b92253b57a5280fbf4ac1977b830fa87d681b6197f5d0dd80c52f7d5943ed2693c87e4d13
   languageName: node
   linkType: hard
 
@@ -2219,7 +2219,7 @@ __metadata:
   resolution: "alcohol-friday-fe@workspace:."
   dependencies:
     "@svgr/webpack": ^8.1.0
-    "@tanstack/react-query": ^5.25.0
+    "@tanstack/react-query": ^5.28.9
     "@tanstack/react-query-devtools": ^5.28.4
     "@types/navermaps": ^3.7.4
     "@types/node": ^20

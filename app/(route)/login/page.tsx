@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { getProviders, getSession, signIn } from 'next-auth/react';
 import { useRouter } from 'next/navigation';
+import Loading from 'app/loading';
 // import { useRouter } from 'next/router';
 
 export default function login() {
@@ -36,12 +37,12 @@ export default function login() {
   };
 
   if (isLoading) {
-    return <p>Loading ...</p>;
+    return <Loading />;
   }
 
   return (
-    <div className="m-auto flex flex-col items-center">
-      <p className="text-[40px] font-bold font-['Inter'] mt-24">로그인</p>
+    <div className="mx-auto flex flex-col items-center my-28 h-full">
+      <p className="text-[40px] font-bold font-['Inter']">로그인</p>
       <p className="text-base text-center mt-5">
         전통주 홈페이지에 오신걸 환영합니다! <br />
         버튼을 클릭하여 로그인을 진행해주세요.

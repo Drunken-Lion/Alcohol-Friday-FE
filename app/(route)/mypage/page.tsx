@@ -19,7 +19,7 @@ export default function mypage() {
   };
 
   return (
-    <div className="w-screen h-full my-20">
+    <div className="h-full my-20">
       <Navigation
         nickname={session?.user.nickname}
         onClick={handleTabClick}

@@ -32,7 +32,7 @@ export default function Carts() {
   totalPrice.toLocaleString('ko-KR');
 
   return (
-    <div className="mx-36 my-20">
+    <div className="mx-36 my-20 h-full">
       <p className="text-center text-black text-[40px] font-normal mb-5">장바구니</p>
       {/* <div className="flex items-center mb-5 ml-5">
         <Checkbox className="w-[25px] h-[25px] flex rounded-1 border-2 border-gray-300 mr-2" />
