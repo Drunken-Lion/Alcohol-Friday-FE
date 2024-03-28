@@ -24,10 +24,9 @@ export default function ProductItem({
 
   return (
     <div className={`flex ${detailCheck ? 'flex-row' : 'flex-col'} w-full gap-5`}>
-      <img
-        src={image}
-        className="rounded-lg border border-slate-700 border-opacity-20 py-10 px-36"
-      />
+      <div className="flex justify-center rounded-lg border border-slate-700 border-opacity-20 py-4">
+        <img src={image} className="object-contain w-[195px] h-[311px]" />
+      </div>
       {detailCheck ? (
         <div>
           <p className="text-stone-500 text-2xl font-bold pb-5">{name}</p>
