@@ -4,12 +4,12 @@ import Button from '../Button';
 import Pagination from '../Pagination';
 import Loading from 'app/loading';
 import NotFound from 'app/not-found';
-import MapModal from './MapModal';
-import Map from '../Map';
+// import MapModal from './MapModal';
+// import Map from '../Map';
 import useRestaurant from 'app/_hooks/useRestaurant';
 import { RestaurantCheckItemData, RestaurantCheckRequestData } from 'app/_types/restaurant';
-import useMap from 'app/_hooks/useMap';
-import { NaverMap } from 'app/_types/map';
+// import useMap from 'app/_hooks/useMap';
+// import { NaverMap } from 'app/_types/map';
 import Location from '/public/images/location_button.svg';
 
 export default function HandlingStore({
