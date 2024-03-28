@@ -63,7 +63,7 @@ export const authOptions: NextAuthOptions = {
         token.refreshToken = account?.refreshToken;
         token.member = account?.memberResponse;
 
-        // return token;
+        return token;
       }
 
       /**
