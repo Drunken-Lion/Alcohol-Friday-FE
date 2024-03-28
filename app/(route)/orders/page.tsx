@@ -9,7 +9,7 @@ export default function Orders() {
       <OrderProduct />
       <div className="flex justify-center my-10">
         <Button
-          buttonName="6,002,500원 결제하기"
+          buttonName="3,002,500원 결제하기"
           className="w-1/2 bg-slate-700 rounded-[5px] text-center text-white text-xl font-bold py-2.5 px-[60px]"
         />
       </div>

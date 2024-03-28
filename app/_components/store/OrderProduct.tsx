@@ -19,7 +19,7 @@ export default function OrderProduct() {
         </div>
         <div className="flex justify-between border border-gray-300 rounded-[5px] px-7 py-4">
           <span className="text-neutral-400 text-xl font-bold">총 상품 금액</span>
-          <span className=" text-zinc-800 text-xl font-bold">6,000,000원</span>
+          <span className=" text-zinc-800 text-xl font-bold">3,000,000원</span>
         </div>
         <div className="flex justify-between border border-gray-300 rounded-[5px] px-7 py-4">
           <span className="text-neutral-400 text-xl font-bold">배송비</span>
@@ -27,7 +27,7 @@ export default function OrderProduct() {
         </div>
         <div className="flex justify-between border border-gray-300 rounded-[5px] px-7 py-4">
           <span className="text-zinc-800 text-xl font-bold">총 결재 금액</span>
-          <span className="text-blue-900 text-xl font-bold">6,002,500원</span>
+          <span className="text-blue-900 text-xl font-bold">3,002,500원</span>
         </div>
       </div>
     </div>
